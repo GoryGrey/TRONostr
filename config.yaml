@@ -1,0 +1,30 @@
+# TRONostr Configuration
+
+tron:
+  fullHost: "https://api.trongrid.io"
+  eventServer: "https://api.trongrid.io"
+  solidityNode: "https://api.trongrid.io"
+  # Public TRON nodes often have rate limits. Use an API key in .env if needed.
+  
+nostr:
+  relays:
+    - "wss://relay.damus.io"
+    - "wss://nos.lol"
+    - "wss://relay.nostr.band"
+  kindRange:
+    start: 6500
+    end: 6599
+  # Rate limiting: limit events published per relay
+  rateLimit:
+    eventsPerMinute: 10 # Slow down to 10 events per minute per relay
+    queueSize: 100
+
+detectors:
+  whaleTransfer:
+    enabled: true
+    trxThreshold: 1000000 # 1M TRX
+    usdtThreshold: 100000 # 100k USDT
+    usdtContract: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
+  
+  blockMetrics:
+    enabled: true
