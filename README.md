@@ -50,6 +50,39 @@ TRONostr publishes events in the `6500-6599` kind range (default):
 
 Each event is tagged with `["chain", "tron"]` and relevant metadata for efficient filtering.
 
+## Client Integration (SDK)
+
+It’s easy to integrate TRONostr into your own apps or bots using our built-in `TRONostrClient`.
+
+### Installation
+If you are using this as a library:
+```bash
+npm install tronweb nostr-tools ws
+```
+
+### Usage
+```typescript
+import { TRONostrClient } from './src/Client';
+
+const client = new TRONostrClient({
+  relays: ["wss://nos.lol"]
+});
+
+await client.connect();
+
+// Listen for whale transfers
+client.onTransfer((event) => {
+  console.log("Whale Alert:", event.parsedContent.amount);
+});
+
+// Listen for block metrics
+client.onBlock((event) => {
+  console.log("New Block:", event.parsedContent.height);
+});
+```
+
+See `examples/bot_example.ts` for a full implementation.
+
 ## License
 
 Permissive MIT/Apache license. Built for the TRON and Nostr communities.
