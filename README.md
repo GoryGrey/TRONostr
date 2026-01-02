@@ -1,5 +1,7 @@
 # TRONostr 🚀
 
+![TRONostr Terminal](assets/terminal.png)
+
 TRONostr is an open-source oracle daemon that bridges **TRON** blockchain activity to **Nostr**. It monitors blocks, transactions, and smart contract logs (TRC-20) and broadcasts signed, machine-readable "insights" to Nostr relays.
 
 ## Features
