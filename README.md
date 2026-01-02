@@ -2,16 +2,20 @@
 
 ![TRONostr Terminal](assets/terminal.png)
 
-TRONostr is an open-source oracle daemon that bridges **TRON** blockchain activity to **Nostr**. It monitors blocks, transactions, and smart contract logs (TRC-20) and broadcasts signed, machine-readable "insights" to Nostr relays.
+TRONostr is a high-performance, open-source oracle daemon that turns raw **TRON** blockchain activity into real-time, signed **Nostr** events.
 
-## Features
+> [!IMPORTANT]
+> **Built for Developers, Bots, and Social Apps.** TRONostr provides a lightweight, unified bridge that allows any application—from AI-powered trading bots to social dashboards—to consume TRON intelligence in minutes without running heavy TRON infrastructure.
 
-- **TRON Watcher**: Real-time streaming of blocks and transactions using `TronWeb`.
-- **Modular Detectors**:
-  - `WhaleTransferDetector`: Monitors large TRX and USDT movements.
-  - `BlockMetricsDetector`: Aggregates per-block statistics (tx count, gas, etc.).
-- **Nostr Publisher**: Signed event broadcasting with builtin **Rate Limiting** and message queuing to respect relay limits.
-- **Configurable**: YAML-based configuration for RPC endpoints, relays, and detection thresholds.
+## Key Features
+
+- **Instant Integration**: Plug TRON data directly into **Nostr social clients, Discord bots, and Telegram alerts**.
+- **TRON Watcher**: Real-time streaming of blocks and transactions using high-performance `TronWeb` polling.
+- **Modular Detector Engine**: 
+  - `WhaleTransferDetector`: Instant alerts for significant TRX and USDT movements.
+  - `BlockMetricsDetector`: Live health and throughput metrics for the TRON network.
+- **Developer-First SDK**: A lightweight TypeScript client to get you started in seconds.
+- **Reliable Publishing**: Signed events with built-in publication throttling to ensure stability across global Nostr relays.
 
 ## Quick Start
 
