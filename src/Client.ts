@@ -43,9 +43,6 @@ export class TRONostrClient {
                     } catch (e) {
                         callback(event);
                     }
-                },
-                ononevent() {
-                    // Handled per event
                 }
             });
         }
@@ -57,8 +54,8 @@ export class TRONostrClient {
     onAll(callback: (event: any) => void) {
         this.subscribe({
             kinds: [this.kindRange.start, this.kindRange.start + 1, this.kindRange.start + 2, this.kindRange.start + 9],
-            tags: [['chain', 'tron']]
-        }, callback);
+            "#c": ["tron"] // In nostr-tools v2, use #prefix for tags
+        } as Filter, callback);
     }
 
     /**
@@ -67,8 +64,9 @@ export class TRONostrClient {
     onBlock(callback: (event: any) => void) {
         this.subscribe({
             kinds: [this.kindRange.start],
-            tags: [['chain', 'tron'], ['type', 'block_metrics']]
-        }, callback);
+            "#c": ["tron"],
+            "#type": ["block_metrics"]
+        } as any, callback);
     }
 
     /**
@@ -77,15 +75,15 @@ export class TRONostrClient {
     onTransfer(callback: (event: any) => void) {
         this.subscribe({
             kinds: [this.kindRange.start + 1, this.kindRange.start + 2],
-            tags: [['chain', 'tron'], ['type', 'whale_transfer']]
-        }, callback);
+            "#c": ["tron"],
+            "#type": ["whale_transfer"]
+        } as any, callback);
     }
 
     /**
      * Listen to High/Critical severity events
      */
     onAlerts(callback: (event: any) => void) {
-        // High/Critical are usually tagged or specifically detected
         this.onAll((event) => {
             const severity = event.tags.find((t: any) => t[0] === 'severity')?.[1];
             if (severity === 'high' || severity === 'critical') {
