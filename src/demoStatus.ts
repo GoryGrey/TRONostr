@@ -17,6 +17,14 @@ import { formatBanner, formatStatusSnapshot } from './cli/format';
 
 dotenv.config();
 
+const quietLogger = {
+    log: () => undefined,
+    warn: () => undefined,
+    error: (...args: unknown[]) => {
+        console.error(...args);
+    },
+};
+
 async function main() {
     const liveMode = process.argv.includes('--live');
 
@@ -39,6 +47,7 @@ async function runSmokeStatus() {
         rateLimit: config.nostr.rateLimit,
         connectRelay,
         autoProcess: false,
+        logger: quietLogger,
     });
     const tracker = new TRONostrStatusTracker();
     const detectors: Detector[] = [

@@ -10,6 +10,14 @@ import { TRONostrClient } from './Client';
 import { InMemoryRelayHub, createInMemoryRelayConnector } from './testing/InMemoryRelay';
 import { formatBanner, formatEventSummary, formatKeyValueGrid, formatLaunchSummary, formatSection, formatStatusSnapshot } from './cli/format';
 
+const quietLogger = {
+    log: () => undefined,
+    warn: () => undefined,
+    error: (...args: unknown[]) => {
+        console.error(...args);
+    },
+};
+
 async function main() {
     const config = getSmokeConfig();
     const hub = new InMemoryRelayHub();
@@ -21,11 +29,13 @@ async function main() {
         rateLimit: config.nostr.rateLimit,
         connectRelay,
         autoProcess: false,
+        logger: quietLogger,
     });
     const client = new TRONostrClient({
         relays: config.nostr.relays,
         kindRange: config.nostr.kindRange,
         connectRelay,
+        logger: quietLogger,
     });
     const tracker = new TRONostrStatusTracker();
     const detectors: Detector[] = [

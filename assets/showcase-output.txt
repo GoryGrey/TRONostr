@@ -1,0 +1,57 @@
+
+> tronostr@1.0.0 showcase
+> ts-node src/showcase.ts
+
+==================================================
+TRONostr Showcase
+Deterministic TRON telemetry demo with relay publishing, machine-readable events, and optional webhook mirroring.
+==================================================
+chain            : TRON
+schema           : tronostr.v1
+relay transport  : Nostr (default)
+secondary output : Webhook (optional)
+demo mode        : Deterministic fixtures
+
+What TRONostr Produced
+----------------------
+  [block_metrics] severity=info block=57000001 txCount=2
+  [trx_transfer] severity=medium asset=TRX amount=2500 tx=trx-smoke-hash
+  [usdt_transfer] severity=medium asset=USDT amount=2500 tx=usdt-smoke-hash
+
+How It Feeds Other Systems
+--------------------------
+  relayPublishedEvents: 3
+  webhookMirrors: 3
+  sdkConsumedEvents: 3
+
+Operational Snapshot
+--------------------
+Status Snapshot
+  activeRelays: 1
+  queueLength: 0
+  latestBlockSeen: 57000001
+  eventsProcessed: 3
+  alertsSurfaced: 0
+  publishAttempts: 3
+  deliveredCount: 3
+  reconnectAttempts: 0
+  lastEventType: usdt_transfer
+  eventTypeCounts:
+  block_metrics: 1
+  trx_transfer: 1
+  usdt_transfer: 1
+
+Launch Summary
+--------------
+- TRONostr turns TRON chain activity into structured machine-readable telemetry.
+- Nostr is the first and default transport for open relay distribution.
+- The same event contract can also feed HTTP webhook integrations.
+- Bots, dashboards, and automation can consume the same normalized events.
+
+Next Steps
+------------
+  Use npm run demo:status for a compact status snapshot.
+  Use examples/bot_example.ts for alert consumption.
+  Use examples/block_telemetry_consumer.ts for dashboard-style telemetry.
+  Use examples/webhook_receiver.ts to receive mirrored events.
+  Use examples/event_flow_example.ts to inspect the raw event envelope.

@@ -1,5 +1,7 @@
 # TRONostr
 
+![TRONostr banner](./TRONostr%20banner%20image.png)
+
 TRONostr is open realtime TRON telemetry infrastructure. It watches TRON activity, turns raw chain data into structured machine-readable events, and distributes those events over Nostr as the first/default transport, with optional webhook mirroring for secondary delivery.
 
 Builders can use it to feed bots, dashboards, alerting pipelines, and automation that need clean TRON signals without running a custom TRON ingestion stack.
@@ -96,6 +98,10 @@ npm run showcase
 - what the machine-readable events look like
 - how those events can feed relays, SDK consumers, and webhook sinks
 - what runtime stats are available
+
+Actual `npm run showcase` terminal output:
+
+![TRONostr showcase terminal](./assets/showcase-terminal.png)
 
 Other useful local commands:
 
@@ -291,6 +297,7 @@ Small launch-facing text assets are included in `launch`:
 
 - `launch/ABOUT_BLURB.md`
 - `launch/PITCH.md`
+- `launch/WHAT_TRONOSTR_IS.md`
 - `launch/THREAD_DRAFT.md`
 - `launch/SHOWCASE_WALKTHROUGH.md`
 
