@@ -13,12 +13,26 @@ export class BlockMetricsDetector implements Detector {
             timestamp: blockHeader.timestamp,
             severity: 'info',
             content: {
-                height: blockHeader.number,
-                hash: block.blockID,
-                txCount: txCount,
-                witness: blockHeader.witness_address
+                schema: 'tronostr.v1',
+                chain: 'tron',
+                category: 'telemetry',
+                eventType: 'block_metrics',
+                severity: 'info',
+                source: {
+                    detector: this.name,
+                },
+                block: {
+                    height: blockHeader.number,
+                    hash: block.blockID,
+                    timestamp: blockHeader.timestamp,
+                },
+                data: {
+                    height: blockHeader.number,
+                    hash: block.blockID,
+                    txCount: txCount,
+                    witness: blockHeader.witness_address,
+                }
             },
-            tags: [['chain', 'tron'], ['type', 'block_metrics']]
         });
 
         return insights;

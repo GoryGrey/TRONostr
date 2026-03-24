@@ -1,9 +1,10 @@
+import { InsightType, Severity, TRONostrEventContent } from '../schema';
+
 export interface Insight {
-    type: string;
+    type: InsightType;
     timestamp: number;
-    severity: 'info' | 'low' | 'medium' | 'high' | 'critical';
-    content: any;
-    tags: string[][];
+    severity: Severity;
+    content: TRONostrEventContent;
 }
 
 export interface Detector {

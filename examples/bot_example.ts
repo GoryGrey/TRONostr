@@ -1,45 +1,32 @@
-import { TRONostrClient } from '../src/Client';
+import { TRONostrClient } from '../src/lib';
 
 async function main() {
-    console.log("-----------------------------------------");
-    console.log("TRONostr Bot Example Starting...");
-    console.log("-----------------------------------------");
-
     const client = new TRONostrClient({
-        relays: [
-            "wss://nos.lol",
-            "wss://relay.damus.io"
-        ]
+        relays: ['wss://nos.lol', 'wss://relay.damus.io'],
     });
 
     await client.connect();
 
-    // 1. Listen for all WHALE transfers
-    client.onTransfer((event) => {
-        const data = event.parsedContent;
-        console.log(`[BOT] 🚨 WHALE ALERT! ${data.amount} ${data.asset || 'TRX'} moved!`);
-        console.log(`[BOT] From: ${data.from} -> To: ${data.to}`);
-        console.log(`[BOT] Tx: https://tronscan.org/#/transaction/${data.hash}`);
-        console.log("-----------------------------------------");
-    });
+    console.log('[bot] relay stats', client.getStats());
 
-    // 2. Listen for Block Metrics
-    client.onBlock((event) => {
-        const data = event.parsedContent;
-        console.log(`[BOT] 📊 Block #${data.height} processed with ${data.txCount} transactions.`);
-    });
-
-    // 3. Listen for High Severity alerts specifically
     client.onAlerts((event) => {
-        console.log(`[BOT] 🔥 CRITICAL EVENT DETECTED! Kind: ${event.kind}`);
-        console.log(`[BOT] Data:`, JSON.stringify(event.parsedContent, null, 2));
+        const payload = event.parsedContent;
+        console.log(`[bot] ${payload.severity.toUpperCase()} ${payload.eventType}`);
+        console.log(`[bot] tx=${payload.transaction?.hash} amount=${payload.data.amount} asset=${payload.asset ?? 'TRX'}`);
+    });
+
+    client.onUSDTTransfer((event) => {
+        const payload = event.parsedContent;
+        console.log(`[bot] usdt flow from=${payload.data.from} to=${payload.data.to} amount=${payload.data.amount}`);
     });
 
     process.on('SIGINT', () => {
-        console.log("Shutting down bot...");
         client.close();
-        process.exit();
+        process.exit(0);
     });
 }
 
-main().catch(console.error);
+main().catch((error) => {
+    console.error('[bot] Failed:', error);
+    process.exit(1);
+});

@@ -1,10 +1,20 @@
-# TRONostr Configuration
+# TRONostr runtime configuration
 
 tron:
   fullHost: "https://api.trongrid.io"
   eventServer: "https://api.trongrid.io"
   solidityNode: "https://api.trongrid.io"
-  # Public TRON nodes often have rate limits. Use an API key in .env if needed.
+  pollIntervalMs: 3000
+  # Optional fixed starting point used only when checkpoint restore is disabled or empty.
+  # startBlock: 57000000
+  maxBackoffMs: 30000
+  backoffMultiplier: 2
+  jitterMs: 250
+  checkpoint:
+    enabled: false
+    path: "./storage/tronostr-checkpoints.json"
+    key: "mainnet-default"
+  # Public TRON nodes often have rate limits. Use TRON_PRO_API_KEY in .env if needed.
   
 nostr:
   relays:
@@ -14,16 +24,29 @@ nostr:
   kindRange:
     start: 6500
     end: 6599
-  # Rate limiting: limit events published per relay
+  reconnect:
+    enabled: true
+    initialDelayMs: 1000
+    maxDelayMs: 30000
+    multiplier: 2
+    jitterMs: 250
+  # Per-relay publishing throttle.
   rateLimit:
-    eventsPerMinute: 10 # Slow down to 10 events per minute per relay
+    eventsPerMinute: 10
     queueSize: 100
+
+output:
+  webhook:
+    enabled: false
+    url: "http://127.0.0.1:8787/tronostr"
+    timeoutMs: 5000
+    headers: {}
 
 detectors:
   whaleTransfer:
     enabled: true
-    trxThreshold: 1000000 # 1M TRX
-    usdtThreshold: 100000 # 100k USDT
+    trxThreshold: 1000000
+    usdtThreshold: 100000
     usdtContract: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
   
   blockMetrics:

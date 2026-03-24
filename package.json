@@ -1,16 +1,48 @@
 {
   "name": "tronostr",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "ts-node src/index.ts",
-    "start": "tsc && node dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "Open realtime TRON event infrastructure for bots, AI agents, analytics, and autonomous finance systems, with Nostr as the first transport layer.",
+  "main": "dist/lib.js",
+  "types": "dist/lib.d.ts",
+  "exports": {
+    ".": "./dist/lib.js",
+    "./client": "./dist/Client.js",
+    "./schema": "./dist/schema.js",
+    "./runtime": "./dist/runtime/TRONostrRuntime.js",
+    "./status": "./dist/runtime/StatusTracker.js",
+    "./output": "./dist/output/WebhookOutput.js"
   },
-  "keywords": [],
+  "files": [
+    "dist",
+    "README.md",
+    "config.yaml"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "ts-node src/index.ts",
+    "start": "npm run build && node dist/index.js",
+    "smoke": "ts-node src/smoke.ts",
+    "showcase": "ts-node src/showcase.ts",
+    "demo:status": "ts-node src/demoStatus.ts",
+    "smoke:live": "ts-node src/verifyTron.ts && ts-node src/verifyRelays.ts",
+    "verify:tron": "ts-node src/verifyTron.ts",
+    "verify:relays": "ts-node src/verifyRelays.ts",
+    "test": "ts-node test/run.ts"
+  },
+  "keywords": [
+    "tron",
+    "nostr",
+    "telemetry",
+    "event-stream",
+    "structured-events",
+    "bots",
+    "ai-agents",
+    "autonomous-finance",
+    "monitoring",
+    "signal-infrastructure"
+  ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "type": "commonjs",
   "dependencies": {
     "dotenv": "^17.2.3",

@@ -1,0 +1,1 @@
+TRONostr is open realtime TRON telemetry infrastructure. It converts TRON chain activity into structured machine-readable events, distributes them over Nostr as the first/default transport, and can optionally mirror the same event contract to webhook consumers.
