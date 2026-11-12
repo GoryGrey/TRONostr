@@ -13,7 +13,7 @@ All notable changes to this project are documented here. Format follows
   `TRONOSTR_RETENTION_DAYS` and `TRONOSTR_HISTORY` overrides.
 - New API endpoints: `/api/v1/history` (filters and cursor pagination), `/api/v1/history/stats`,
   `/api/v1/trends?hours=` (zero-filled hourly buckets), and `/api/v1/labels`.
-- The Tron Report live dashboard at `/`: static HTML, CSS and JS with inline SVG charts, no
+- TRONostr live dashboard at `/`: static HTML, CSS and JS with inline SVG charts, no
   third-party scripts, a strict CSP, and an explicit non-affiliation notice. It can be turned off
   with `api.dashboard: false`.
 - `BlockMetricsDetector` per-block activity counts over all successful transactions:
@@ -41,6 +41,8 @@ All notable changes to this project are documented here. Format follows
   which roughly halves steady-state TronGrid calls. It also paces catch-up `getBlock` calls with
   `minRequestIntervalMs` (default 400 ms without an API key, 0 with one). Both changes came from a
   live run where keyless TronGrid returned HTTP 429 three times in about 7.5 minutes.
+- Dashboard and docs are branded TRONostr, a neutral engine anyone can run. The Tron Report is
+  described only as a separate downstream platform powered by TRONostr.
 - Dashboard: chart "max / hour" labels are HTML above each chart instead of SVG text, so they no
   longer stretch or shrink with the chart. Exchange-flow rows show the full entity label (e.g.
   "Kraken: Hot Wallet"). `/summary` `exchangeFlows` entries now include an `entity` field.

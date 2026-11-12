@@ -57,7 +57,7 @@ waitlist features:
 | Exchange in/outflow | `exchange_flow` with 13 bundled Tronscan public-tag labels (source cited, evidence committed) | **working locally (v1.2.0); lower bound only** |
 | Network telemetry | `block_metrics` (transactions per block, witness, per-block activity counts) | **working** |
 | History + hourly trends | SQLite store, `/api/v1/history`, `/api/v1/trends` (30-day retention) | **working locally (v1.2.0)** |
-| Live dashboard | static The Tron Report page served by the API at `/` | **working locally (v1.2.0); not hosted yet** |
+| Live dashboard | static TRONostr dashboard page served by the API at `/` (The Tron Report will build its own UI on the API) | **working locally (v1.2.0); not hosted yet** |
 | Compliance flagging, DEX/SunPump, governance feed | none yet | milestone 3+ |
 | Price / market data | out of scope for TRONostr (third-party price feeds) | n/a |
 

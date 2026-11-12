@@ -9,11 +9,12 @@ them over:
 
 - **Nostr relays** (signed events, kinds 6500–6504), the default public transport
 - a **read-only JSON API** with 7–30 days of **SQLite history** and hourly trend series
-- a built-in, static **live dashboard** ("The Tron Report") served at `/`
+- a built-in, static **live dashboard** served at `/`
 - **JSONL files** for archiving and replay
 - **webhooks** for existing pipelines
 
-It is the data engine planned for **The Tron Report**, a TRON analytics and research platform.
+TRONostr is a neutral, open engine that anyone can run. **The Tron Report**, a separate TRON analytics
+and research platform that is still being planned, will be powered by TRONostr as its first consumer.
 
 > Status: pre-release (v1.2.0, not yet published to npm, not yet deployed anywhere). Everything
 > below runs today on a laptop against public TronGrid with no API key. See `samples/` for real
@@ -35,7 +36,7 @@ Run the live runtime in **local mode** (no keys needed, nothing is signed or pub
 
 ```bash
 npm start
-open http://127.0.0.1:8788/            # The Tron Report live dashboard
+open http://127.0.0.1:8788/            # live dashboard
 curl http://127.0.0.1:8788/api/v1/summary
 curl 'http://127.0.0.1:8788/api/v1/trends?hours=24'
 ```
@@ -111,7 +112,7 @@ and sends CORS headers. `/events` and `/summary` serve from an in-memory ring bu
 | `GET /api/v1/history/stats` | retention window, row counts, oldest/newest stored event, last prune |
 | `GET /api/v1/trends?hours=24` | zero-filled hourly buckets: whale USDT/TRX volume, delegation counts, tx counts, exchange flows |
 | `GET /api/v1/labels` | the bundled public address labels and their sources |
-| `GET /` | The Tron Report live dashboard (static HTML/JS, no third-party scripts) |
+| `GET /` | live dashboard (static HTML/JS, no third-party scripts) |
 
 `since` is seconds before the newest stored event. See `docs/API.md` for response shapes.
 
@@ -135,7 +136,7 @@ validators. Subpaths: `tronostr/client`, `tronostr/schema`, `tronostr/runtime`, 
 `tronostr/output`, `tronostr/api`, `tronostr/store`. After install, a `tronostr` CLI runs the
 runtime.
 
-### The Tron Report dashboard
+### Dashboard
 
 `/` serves a single static page: summary cards for the last hour, 24-hour bar charts (whale USDT
 volume, all energy/bandwidth delegations, network transactions), the latest whale transfers and
@@ -154,7 +155,7 @@ free and low-cost hosts (researched November 2026).
 ```text
 TronGrid (public) -> Watcher -> Detectors -> validated tronostr.v1 events
                                                 |-> SqliteEventStore (ring buffer + SQLite history)
-                                                |      -> JSON API + dashboard (The Tron Report)
+                                                |      -> JSON API + dashboard -> downstream apps (e.g. The Tron Report)
                                                 |-> Nostr Publisher -> relays -> bots / agents
                                                 |-> JSONL file / webhook
 ```

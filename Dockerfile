@@ -1,4 +1,4 @@
-# TRONostr / The Tron Report: always-on watcher + JSON API + dashboard.
+# TRONostr: always-on watcher + JSON API + dashboard.
 # node:sqlite needs Node >= 22.13; the node:22 image tracks the latest 22.x.
 FROM node:22-bookworm-slim AS build
 WORKDIR /app

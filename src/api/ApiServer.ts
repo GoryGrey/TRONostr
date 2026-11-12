@@ -25,7 +25,7 @@ export interface ApiServerOptions {
     kindRange?: { start: number; end: number };
     /** Enables /api/v1/history, /api/v1/history/stats and /api/v1/trends. */
     history?: HistoryProvider;
-    /** Serve the static "The Tron Report" dashboard at "/". Default true. */
+    /** Serve the static TRONostr dashboard at "/". Default true. */
     dashboard?: boolean;
     /** Report whether bundled public labels are active (for /api/v1/labels). */
     publicLabelsEnabled?: boolean;
@@ -45,7 +45,7 @@ const VERSION = 'v1';
  *   GET /api/v1/history/stats                                              (needs history)
  *   GET /api/v1/trends?hours=24                                            (needs history)
  *   GET /api/v1/labels
- *   GET /            static dashboard (The Tron Report), plus /assets/*
+ *   GET /            static TRONostr dashboard, plus /assets/*
  */
 export class ApiServer {
     private readonly options: ApiServerOptions;

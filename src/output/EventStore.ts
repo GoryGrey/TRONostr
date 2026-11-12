@@ -34,7 +34,7 @@ const SEVERITY_RANK = { info: 0, low: 1, medium: 2, high: 3, critical: 4 } as co
 
 /**
  * In-memory ring buffer of prepared events. It is an output transport (deliver) and the read model
- * for the HTTP API, so a future dashboard (e.g. The Tron Report) can query recent events and a
+ * for the HTTP API, so dashboards (the built-in one, or downstream platforms) can query recent events and a
  * rolled-up summary without running a relay client.
  */
 export class EventStore {

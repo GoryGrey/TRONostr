@@ -1,5 +1,5 @@
 /**
- * Static assets for the public "The Tron Report" live dashboard served by ApiServer at "/".
+ * Static assets for the public TRONostr live dashboard served by ApiServer at "/".
  * Plain HTML/CSS/JS, no build step, no third-party scripts, fonts, or trackers. All charts are
  * inline SVG drawn from the JSON API. Every string from the API is inserted with textContent.
  */
@@ -9,15 +9,15 @@ export const DASHBOARD_HTML = `<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Tron Report · Live TRON network monitor</title>
-<meta name="description" content="Independent, open-source live monitor of TRON whale transfers, USDT flows and the energy rental market. Powered by TRONostr.">
+<title>TRONostr · Live TRON network monitor</title>
+<meta name="description" content="Independent, open-source live monitor of TRON whale transfers, USDT flows and the energy rental market, served by a TRONostr instance.">
 <link rel="stylesheet" href="/assets/dashboard.css">
 </head>
 <body>
 <header>
   <div class="brand">
-    <h1>The Tron Report</h1>
-    <p class="sub">Live TRON network monitor &middot; powered by <a href="https://github.com/GoryGrey/TRONostr" rel="noopener">TRONostr</a> (open source)</p>
+    <h1>TRONostr</h1>
+    <p class="sub">Live TRON network monitor &middot; open-source engine anyone can run (<a href="https://github.com/GoryGrey/TRONostr" rel="noopener">source</a>)</p>
   </div>
   <div class="status" id="status">connecting&hellip;</div>
 </header>
@@ -61,7 +61,7 @@ export const DASHBOARD_HTML = `<!doctype html>
   </section>
 </main>
 <footer>
-  <p>The Tron Report is an independent project. It is not affiliated with, endorsed by, or speaking for TRON DAO, the TRON Foundation, Tether, or any exchange.
+  <p>TRONostr is an independent, open-source project. It is not affiliated with, endorsed by, or speaking for TRON DAO, the TRON Foundation, Tether, or any exchange.
   Data is read from public TRON mainnet APIs (TronGrid) and may be delayed or incomplete. Nothing here is financial advice.</p>
   <p>Open JSON API: <a href="/api/v1/summary">/api/v1/summary</a> &middot; <a href="/api/v1/trends?hours=24">/api/v1/trends</a> &middot; <a href="/api/v1/history?limit=20">/api/v1/history</a> &middot; <a href="/api/v1/status">/api/v1/status</a></p>
 </footer>

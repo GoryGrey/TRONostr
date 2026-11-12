@@ -1,4 +1,4 @@
-# Deploying TRONostr / The Tron Report
+# Deploying TRONostr
 
 TRONostr is one long-running Node process. It polls TronGrid about every 3 seconds, serves the JSON
 API and dashboard over HTTP, and writes SQLite history to a local disk. A host needs to:

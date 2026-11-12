@@ -230,7 +230,8 @@ export const historyCases: TestCase[] = [
                 assert.equal(page.status, 200);
                 assert.match(String(page.headers['content-type']), /text\/html/);
                 assert.match(String(page.headers['content-security-policy']), /script-src 'self'/);
-                assert.match(page.text, /The Tron Report/);
+                assert.match(page.text, /<h1>TRONostr<\/h1>/);
+                assert.doesNotMatch(page.text, /Tron Report/, 'dashboard carries no Tron Report branding');
                 assert.match(page.text, /not affiliated with/);
                 const js = await get(port, '/assets/dashboard.js');
                 assert.match(String(js.headers['content-type']), /javascript/);

@@ -38,7 +38,7 @@ nostr:
     eventsPerMinute: 10
     queueSize: 100
 
-# Small read-only JSON API over recent events, plus the static "The Tron Report" dashboard at "/".
+# Small read-only JSON API over recent events, plus the static TRONostr dashboard at "/".
 # In containers set TRONOSTR_API_HOST=0.0.0.0 (the Dockerfile does). PORT is honored too.
 api:
   enabled: true

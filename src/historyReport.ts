@@ -67,7 +67,7 @@ async function main() {
         dashboard: {
             status: dash.status,
             bytes: dashHtml.length,
-            hasTitle: dashHtml.includes('The Tron Report'),
+            hasTitle: dashHtml.includes('<h1>TRONostr</h1>'),
             hasNonAffiliationNotice: dashHtml.includes('not affiliated with'),
             csp: dash.headers.get('content-security-policy'),
             assets,
