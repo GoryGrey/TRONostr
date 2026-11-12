@@ -1,0 +1,1007 @@
+{
+ "retrievedAtUtc": "2026-11-12T19:55:00Z",
+ "request": "GET https://apilist.tronscanapi.com/api/token_trc20/holders?contract_address=TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t&start={0,40,80,120,160}&limit=40",
+ "note": "Raw Tronscan public API response, trimmed to holder_address/addressTag/balance (USDT, 6 decimals). Only rows with a non-empty addressTag are used as labels.",
+ "holders": [
+  {
+   "holder_address": "TKHuVq1oKVruCGLvqVexFs6dawKv6fQgFs",
+   "addressTag": "Tether Treasury",
+   "balance": "2116559547257852"
+  },
+  {
+   "holder_address": "TJCo98saj6WND61g1uuKwJ9GMWMT9WkJFo",
+   "addressTag": "Binance 3",
+   "balance": "733269856332000"
+  },
+  {
+   "holder_address": "TRdfD4J3ddSMV5nu5hFDvwzQA4MLS3XdiV",
+   "addressTag": "",
+   "balance": "500000187968155"
+  },
+  {
+   "holder_address": "TUWAjsUGdGA6FeFeTqgWsqNNbLaoPzakGR",
+   "addressTag": "",
+   "balance": "350576538071443"
+  },
+  {
+   "holder_address": "TG5iBMQPrDzJJAUM8GMVBf1hRaJ1wvzsGi",
+   "addressTag": "",
+   "balance": "312729468000000"
+  },
+  {
+   "holder_address": "TWd4WrZ9wn84f5x1hZhL4DHvk738ns5jwb",
+   "addressTag": "Binance-Cold 2",
+   "balance": "310269831898000"
+  },
+  {
+   "holder_address": "TPsMJ3BE9ixSQ7guFbVLZ4eou6SATBSqHH",
+   "addressTag": "",
+   "balance": "300000249554000"
+  },
+  {
+   "holder_address": "TMauqkA78pfysSTn8jD1dvEUkjme2gEEdn",
+   "addressTag": "",
+   "balance": "223346654453610"
+  },
+  {
+   "holder_address": "TNiq9AXBp9EjUqhDhrwrfvAA8U3GUQZH81",
+   "addressTag": "",
+   "balance": "212922804915554"
+  },
+  {
+   "holder_address": "TRSKhXD5qSekLUxfwYxR1zA5kwTLhke2Rx",
+   "addressTag": "",
+   "balance": "189888309690002"
+  },
+  {
+   "holder_address": "TXJgMdjVX5dKiQaUi9QobwNxtSQaFqccvd",
+   "addressTag": "",
+   "balance": "188394044064480"
+  },
+  {
+   "holder_address": "TG2CMGxnTPgQ6V58kiKd7wbyN8ewtAmY76",
+   "addressTag": "Kraken: Hot Wallet",
+   "balance": "187967284449601"
+  },
+  {
+   "holder_address": "TYQc5j8AA3dBh17oDGv1fH2pGswofV3ArP",
+   "addressTag": "",
+   "balance": "180621522046245"
+  },
+  {
+   "holder_address": "THHiKCHNQKxrZiRy4rrqy5jitSP3nUvhJY",
+   "addressTag": "",
+   "balance": "166880579647598"
+  },
+  {
+   "holder_address": "TXFBqBbqJommqZf7BV8NNYzePh97UmJodJ",
+   "addressTag": "Bitfinex",
+   "balance": "135400587891046"
+  },
+  {
+   "holder_address": "TTiDLWE6fZK8okMJv6ijg42yrH6W2pjSr9",
+   "addressTag": "",
+   "balance": "131288801972952"
+  },
+  {
+   "holder_address": "TFvuXyB7AhCV7jZcC9uukZDqrqCvsZQMJh",
+   "addressTag": "",
+   "balance": "125027284388012"
+  },
+  {
+   "holder_address": "TVGDpgtCs45PJE7ZMHhiC76L3v77qAwJW9",
+   "addressTag": "",
+   "balance": "124457429637915"
+  },
+  {
+   "holder_address": "TKhXDEshLkYEYfaPzvKfEj8zCztSqDNUw2",
+   "addressTag": "",
+   "balance": "100000010619000"
+  },
+  {
+   "holder_address": "TCTogwNHDysu9peKtREQkRLsRe7oCFuLMm",
+   "addressTag": "",
+   "balance": "94176879138543"
+  },
+  {
+   "holder_address": "TFQbqaNbmq2xsVor2NbufLkYZvxFC9wC7k",
+   "addressTag": "",
+   "balance": "85527016000000"
+  },
+  {
+   "holder_address": "TXNYeYdao7JL7wBtmzbk7mAie7UZsdgVjx",
+   "addressTag": "",
+   "balance": "83771400971013"
+  },
+  {
+   "holder_address": "TQWWJFsxPSiSwHKHq9kCbtZtjQqybCW7b2",
+   "addressTag": "",
+   "balance": "82429540794670"
+  },
+  {
+   "holder_address": "TBJpiqFNuTcw8MkwxaLYkHEJFJuSgrhdtg",
+   "addressTag": "",
+   "balance": "82212100000000"
+  },
+  {
+   "holder_address": "TSUYvQ5tdd3DijCD1uGunGLpftHuSZ12sQ",
+   "addressTag": "",
+   "balance": "82140593944188"
+  },
+  {
+   "holder_address": "TU4vEruvZwLLkSfV9bNw12EJTPvNr7Pvaa",
+   "addressTag": "Bybit",
+   "balance": "77143765903945"
+  },
+  {
+   "holder_address": "TBzrPEsStbZAUx2SBhD4oHz8UW3FX9Ak9W",
+   "addressTag": "",
+   "balance": "72030295659721"
+  },
+  {
+   "holder_address": "TTYR4Wt17FHd7NPow4KqohNbtp41cNvWL8",
+   "addressTag": "",
+   "balance": "66532344899244"
+  },
+  {
+   "holder_address": "TCzBTkqn66yApqbYoPezaEQosM5DAd7Y62",
+   "addressTag": "",
+   "balance": "65990000000000"
+  },
+  {
+   "holder_address": "TSGEXDSRMtzt9swPSgzr8MKefcgEawEdmb",
+   "addressTag": "",
+   "balance": "63781091000001"
+  },
+  {
+   "holder_address": "THaw7t2XAoNDAZgEkf1ChmemqEjdenTmGv",
+   "addressTag": "",
+   "balance": "63100014327031"
+  },
+  {
+   "holder_address": "TC78v77KqXTtiRPfgo88jjcUoJqXvDtCv4",
+   "addressTag": "",
+   "balance": "61451750280000"
+  },
+  {
+   "holder_address": "TFsbi5vFuxeWPLjAeybA75Z15PqqdFHFmf",
+   "addressTag": "",
+   "balance": "60821246083299"
+  },
+  {
+   "holder_address": "TEv1u1hHtQJJ5vdq188ceyS945QiG9X3xt",
+   "addressTag": "",
+   "balance": "58000000810281"
+  },
+  {
+   "holder_address": "TLaGjwhvA8XQYSxFAcAXy7Dvuue9eGYitv",
+   "addressTag": "OKX Hot Wallet 8",
+   "balance": "56050479066025"
+  },
+  {
+   "holder_address": "TTr4STG8SMVrPafYZEvFjZoerPGFTD8vUR",
+   "addressTag": "",
+   "balance": "55050056106210"
+  },
+  {
+   "holder_address": "TF5hhr57YZCiYcpUsY111mXKKqqQEboeLF",
+   "addressTag": "",
+   "balance": "52228371510005"
+  },
+  {
+   "holder_address": "TVVv7j6kEtemMo89ZS1sZ6Jg54qfcH7s5V",
+   "addressTag": "",
+   "balance": "50401331230593"
+  },
+  {
+   "holder_address": "TMxK3pxfvwD9APBFtdkTy2E92iakBe7FL8",
+   "addressTag": "",
+   "balance": "50313441000000"
+  },
+  {
+   "holder_address": "TGTsSX3L2BF7jcYW1695k63uTmU7YBVGQu",
+   "addressTag": "",
+   "balance": "50010269225012"
+  },
+  {
+   "holder_address": "TCtVtrdy8sSXGMx1QYUjMrAvau1pduC2Aa",
+   "addressTag": "",
+   "balance": "50000008437362"
+  },
+  {
+   "holder_address": "TKFuckiRGCTerroristsNoBiTEXy2r7mNX",
+   "addressTag": "",
+   "balance": "49439310492234"
+  },
+  {
+   "holder_address": "TBA6CypYJizwA9XdC7Ubgc5F1bxrQ7SqPt",
+   "addressTag": "Gate",
+   "balance": "48262294392669"
+  },
+  {
+   "holder_address": "TQeNNo5zVarhdKm5EiJSekfNXg6H1tRN4n",
+   "addressTag": "",
+   "balance": "47104568760001"
+  },
+  {
+   "holder_address": "TRqtSahVi28Rfd1uEW5ap6NzFoGWDwDUyu",
+   "addressTag": "",
+   "balance": "46150050105649"
+  },
+  {
+   "holder_address": "TFGDbUyP8xez44C76fin3bn3Ss6jugoUwJ",
+   "addressTag": "",
+   "balance": "45753102585127"
+  },
+  {
+   "holder_address": "TBF8nfxgJPMJ9rLZ1rFccxAfbNRNtTorPc",
+   "addressTag": "",
+   "balance": "45555218827601"
+  },
+  {
+   "holder_address": "TADKBoNPRtviD6hx8YZ97j3pDLSSaX6Gc6",
+   "addressTag": "",
+   "balance": "44990119304503"
+  },
+  {
+   "holder_address": "TKSpy5F8kQSNsT6er1VDyhxQRJs6h6LXMs",
+   "addressTag": "",
+   "balance": "44514908400837"
+  },
+  {
+   "holder_address": "TH1jHTu9HY5f2exybe21XJRUFNARmNUCog",
+   "addressTag": "",
+   "balance": "43907067250000"
+  },
+  {
+   "holder_address": "TBd4XjgggJGfz6uMyZJGyTEMeRELZbsqg3",
+   "addressTag": "",
+   "balance": "43229534970732"
+  },
+  {
+   "holder_address": "TJTKCzQpsG19CSMYF9TPtxz6wSHPSyeKfa",
+   "addressTag": "Binance-Hot 12",
+   "balance": "42727097375996"
+  },
+  {
+   "holder_address": "TErZkyXAoG4K67hmdvFUh6EgNARNETLkXX",
+   "addressTag": "",
+   "balance": "42560463051615"
+  },
+  {
+   "holder_address": "TG8fAddpQwhWkfyrMeBPCbBYnuPq3kzcpc",
+   "addressTag": "",
+   "balance": "42483825543265"
+  },
+  {
+   "holder_address": "TCh59EXQYCaj3cCwpVzFAJNPFd4vHQQgBL",
+   "addressTag": "",
+   "balance": "41070009447011"
+  },
+  {
+   "holder_address": "TPJPF7WbTio4NDrMZNTd8fdUkfSWmTuwzR",
+   "addressTag": "",
+   "balance": "40966492031463"
+  },
+  {
+   "holder_address": "TApqpZGSNwWPPQpZBU31AWaNZfFyWKXbX7",
+   "addressTag": "",
+   "balance": "40509618295329"
+  },
+  {
+   "holder_address": "TBasfkkjYBzQzvtMi9ZBV1DeRzmYNQFiTv",
+   "addressTag": "",
+   "balance": "38678485500000"
+  },
+  {
+   "holder_address": "TYmftC8cR9zrzdQPt26DZ5WwwexwvLUMES",
+   "addressTag": "",
+   "balance": "38500032059999"
+  },
+  {
+   "holder_address": "TDZ7ofGAZ5seuGLy8Zv96asGjPpJkAckLV",
+   "addressTag": "",
+   "balance": "38250000000000"
+  },
+  {
+   "holder_address": "TF7rc3TEhJk6BJNfFrS79GkCipXQJqHvhk",
+   "addressTag": "",
+   "balance": "38107084020200"
+  },
+  {
+   "holder_address": "TKmiqjVG9jvYd9atx5qwhTRdQBf6rETsSg",
+   "addressTag": "",
+   "balance": "36861560922866"
+  },
+  {
+   "holder_address": "TW22t74WfLH3Y6a1wy1rtwmbRiptw3ZfqW",
+   "addressTag": "",
+   "balance": "36145707601658"
+  },
+  {
+   "holder_address": "TUn81FCcyk5DFnSJEwBjfKpFk4pwURUUV1",
+   "addressTag": "",
+   "balance": "35702781036671"
+  },
+  {
+   "holder_address": "TUQsN7UjgMybNZV92firRJrFmCmXLMz9vC",
+   "addressTag": "",
+   "balance": "35596282052681"
+  },
+  {
+   "holder_address": "TAdu9WqNdSFeoTkhSem2rwUXvZP6rtwP25",
+   "addressTag": "",
+   "balance": "35450802268225"
+  },
+  {
+   "holder_address": "TVjuTE3V5bMVdpfNhid8kD2v35T2k1u1Br",
+   "addressTag": "",
+   "balance": "35376000961617"
+  },
+  {
+   "holder_address": "TLWHAnAB7DuU2iap94yRtcfwkEHgJGJRjH",
+   "addressTag": "",
+   "balance": "35361326190000"
+  },
+  {
+   "holder_address": "TNS55Gb7R4W2F68YvfMCGdV7PKV87QyXS9",
+   "addressTag": "",
+   "balance": "35289696607533"
+  },
+  {
+   "holder_address": "TLb8h1T6JiFV8gn6MU1PjHNnzZo9ECAqMa",
+   "addressTag": "",
+   "balance": "35050019755378"
+  },
+  {
+   "holder_address": "THA31r2W758trZQfqdb6AwKcgxorFZ31gs",
+   "addressTag": "",
+   "balance": "35025022997900"
+  },
+  {
+   "holder_address": "THB2HdtUZwaqxWB2vFy6Ryf599EqxxKdmv",
+   "addressTag": "",
+   "balance": "34975025101200"
+  },
+  {
+   "holder_address": "THeKt3w3hRh4ERyY6GeydsqwgKUcMWbfiN",
+   "addressTag": "",
+   "balance": "33362474689183"
+  },
+  {
+   "holder_address": "TWrmh883bEyEvcfiWDsyYBhDVbsQDn4cDK",
+   "addressTag": "",
+   "balance": "33176083749643"
+  },
+  {
+   "holder_address": "TYqGzWEnoeV9ohjRoBw57rV7iEkt1sYv5g",
+   "addressTag": "",
+   "balance": "33002238185503"
+  },
+  {
+   "holder_address": "TYak24LSNUK6x7FPntxwn6xEDc68UtVJxq",
+   "addressTag": "",
+   "balance": "32719871117924"
+  },
+  {
+   "holder_address": "THMprG2t5T7NsCr47FCmzuwEjVhEFQ7AYb",
+   "addressTag": "",
+   "balance": "32562910801521"
+  },
+  {
+   "holder_address": "TN12qS4gM6qs3B2R4XjuT2zf6BomaDGdRY",
+   "addressTag": "",
+   "balance": "32262029595704"
+  },
+  {
+   "holder_address": "TYcxKj8x82yEjD2JFpBhWAk3zE65d7vJAG",
+   "addressTag": "",
+   "balance": "31893300000000"
+  },
+  {
+   "holder_address": "TK1U4Hym23Jz9fP3p8oker4A8VQdoq88Ms",
+   "addressTag": "KuCoin 10",
+   "balance": "31500009510994"
+  },
+  {
+   "holder_address": "TTvMe55USCAPy2M1FZjw8DLMuZLbuSZyLE",
+   "addressTag": "",
+   "balance": "31336840317369"
+  },
+  {
+   "holder_address": "TLs2pP4QyUocFkVqKGgJ4eTWfdr91rYERF",
+   "addressTag": "",
+   "balance": "31000032000000"
+  },
+  {
+   "holder_address": "TJdgB1k6ot3f2nLuZug6D8eD3HavTmzmSK",
+   "addressTag": "",
+   "balance": "30978224260461"
+  },
+  {
+   "holder_address": "TAMW83eZaMcaeStTQSuZHvYmm26WnCTajQ",
+   "addressTag": "",
+   "balance": "30827563429523"
+  },
+  {
+   "holder_address": "TGxnRqZTkpVk53djTt4ptzTagJe5t7c4jV",
+   "addressTag": "",
+   "balance": "30649986500000"
+  },
+  {
+   "holder_address": "TSvwBJi2TbngwJfPmjSyfUYPFfGdJ7pJnR",
+   "addressTag": "",
+   "balance": "30147292348066"
+  },
+  {
+   "holder_address": "TRwxtXb4BHmUQ7wVvwW15SkgcT4BExkQBi",
+   "addressTag": "",
+   "balance": "30126773168430"
+  },
+  {
+   "holder_address": "TTH75Z9rfRgzCLNDDYBaR2WjUvuSDRtSMg",
+   "addressTag": "Bybit Cold",
+   "balance": "30000023649001"
+  },
+  {
+   "holder_address": "TDNRopgpPNWhDByTjcja3QGkf8aMx92Z35",
+   "addressTag": "",
+   "balance": "30000001000000"
+  },
+  {
+   "holder_address": "TSn9M4thj4nZ45M4WkGDa2nqXVeQQujJm6",
+   "addressTag": "",
+   "balance": "30000000466205"
+  },
+  {
+   "holder_address": "TU5uugJUYGA9fGToSYrfA2mdFUQihQB1k6",
+   "addressTag": "",
+   "balance": "30000000000000"
+  },
+  {
+   "holder_address": "TRd5JjiKLyWtMeDxSXHwTPGdWMyJfd5z8Z",
+   "addressTag": "",
+   "balance": "30000000000000"
+  },
+  {
+   "holder_address": "TAXzngccxTGBqXC7bLofLQtjYJ6rwk49m8",
+   "addressTag": "",
+   "balance": "30000000000000"
+  },
+  {
+   "holder_address": "TCXJzp3JsrLDKf2FTJnWv3kNpKukV96eyk",
+   "addressTag": "",
+   "balance": "29980000000000"
+  },
+  {
+   "holder_address": "TA2FcJaqEiefgy9wdkKi94s1nKYu6ngR8m",
+   "addressTag": "",
+   "balance": "29606589064033"
+  },
+  {
+   "holder_address": "TSM6MaVttYSBJKpG9Yjo2Pd7SUqf5S8Pvd",
+   "addressTag": "",
+   "balance": "29513822100000"
+  },
+  {
+   "holder_address": "TF7tupaDszUBmxdyKRAkQWBYGLkYRdQJGv",
+   "addressTag": "",
+   "balance": "29253159980897"
+  },
+  {
+   "holder_address": "TRtoSMCZ9vWM2C1NKHfQjLcUrphZB8WYT7",
+   "addressTag": "",
+   "balance": "29199000000000"
+  },
+  {
+   "holder_address": "TJ7hhYhVhaxNx6BPyq7yFpqZrQULL3JSdb",
+   "addressTag": "Bitget 9",
+   "balance": "29127258996347"
+  },
+  {
+   "holder_address": "TG5WoBnJw8YCRhBDpboABUzK9ENUkxCy3x",
+   "addressTag": "",
+   "balance": "29000277676713"
+  },
+  {
+   "holder_address": "TKzjgap1y7MmSYnRgn9witmbR2MSg3VXz4",
+   "addressTag": "",
+   "balance": "28488357086013"
+  },
+  {
+   "holder_address": "TCYpJ6MMzd9ytoUvD82HnS58iV75QimPh6",
+   "addressTag": "",
+   "balance": "28363011607880"
+  },
+  {
+   "holder_address": "TT8Eg74RoerrJfuMUEpDnn8WytH31fWzUX",
+   "addressTag": "",
+   "balance": "28306097802367"
+  },
+  {
+   "holder_address": "TWV7gDzxCSJshYAZwafjimpYRZNnp1zrrf",
+   "addressTag": "",
+   "balance": "28262703760796"
+  },
+  {
+   "holder_address": "TDmbZEdbwcPhEvA5NNZmhHzF5mC6vLSyfo",
+   "addressTag": "",
+   "balance": "28100900000000"
+  },
+  {
+   "holder_address": "TUuqckG9DgDvEHPm9yxPQLGHBg9kXsXg5D",
+   "addressTag": "",
+   "balance": "28034427883860"
+  },
+  {
+   "holder_address": "TV6688oCe6VkdJkV6GThsNUcuLfCuxZAtZ",
+   "addressTag": "",
+   "balance": "27677596302995"
+  },
+  {
+   "holder_address": "TQGBDBs4HKQwc7Xswp4AmbWutk7UFjZwj2",
+   "addressTag": "",
+   "balance": "27613784963747"
+  },
+  {
+   "holder_address": "TUspp4dXtjSt9YQvyCwTYEE447BZwiHA1N",
+   "addressTag": "",
+   "balance": "27267758511520"
+  },
+  {
+   "holder_address": "TMZSUZUKhZUUJjkN9L6GyWTiv4R2fqTXRx",
+   "addressTag": "",
+   "balance": "27250586922580"
+  },
+  {
+   "holder_address": "TFG4wBaDQ8sHWWP1ACeSGnoNR6RRzevLPt",
+   "addressTag": "",
+   "balance": "27196345979865"
+  },
+  {
+   "holder_address": "TYWvC1LbAjLgWsfgk2NjidvPwCy52GSETs",
+   "addressTag": "",
+   "balance": "27021057488121"
+  },
+  {
+   "holder_address": "TDcqTm2HcVhDKHVovoDm994Q2QWPFXT3DK",
+   "addressTag": "",
+   "balance": "26883655925195"
+  },
+  {
+   "holder_address": "TKZqR1sRkZQjFe72gBmNmQWkY53rREEjbz",
+   "addressTag": "",
+   "balance": "26863916850393"
+  },
+  {
+   "holder_address": "TX2s7hq1AzhjXRFFcb4N4rpguH7k5ts6Yq",
+   "addressTag": "",
+   "balance": "26740028239596"
+  },
+  {
+   "holder_address": "TXuoUydJQCyqRhgNy9Rh1urXHpi3G6hCVq",
+   "addressTag": "",
+   "balance": "26601108200000"
+  },
+  {
+   "holder_address": "TGH1HKFiFiSahzo5Tj7hSGEwXKH6nam5ao",
+   "addressTag": "",
+   "balance": "26559887000000"
+  },
+  {
+   "holder_address": "TQ4EiPiAuEfYDWx5P47h12k62zzDSNgtdv",
+   "addressTag": "",
+   "balance": "25924316849721"
+  },
+  {
+   "holder_address": "TYE5mNXSQHuPAdCa1etk76BKybD4FKJto6",
+   "addressTag": "",
+   "balance": "25549735447195"
+  },
+  {
+   "holder_address": "TVdshpjE2JDiQJY1vY3aqVAGi8TzgY2s16",
+   "addressTag": "",
+   "balance": "25438100929885"
+  },
+  {
+   "holder_address": "TRovJQxVjQeLawAmSBATfUCT1CFEX2ypCE",
+   "addressTag": "",
+   "balance": "25415412742549"
+  },
+  {
+   "holder_address": "TC4vfEVYX8boCjZ5Xjrq3eLw9hda1MZx3e",
+   "addressTag": "",
+   "balance": "25369872882510"
+  },
+  {
+   "holder_address": "TRyLzWZxdNyrzcW5jfd9jgTYFnff13UXQw",
+   "addressTag": "",
+   "balance": "25336306419554"
+  },
+  {
+   "holder_address": "TWutxZAChP3UnKGK67AwQX5zAwQt6DMtJ3",
+   "addressTag": "",
+   "balance": "25332649290000"
+  },
+  {
+   "holder_address": "TYgTGuufV435PKhfVEss4rWkdPPog4Pxa9",
+   "addressTag": "",
+   "balance": "25301023408748"
+  },
+  {
+   "holder_address": "TUpHuDkiCCmwaTZBHZvQdwWzGNm5t8J2b9",
+   "addressTag": "Kucoin 4",
+   "balance": "25279615903194"
+  },
+  {
+   "holder_address": "TT7mCYz665jFLxZQRd9foSsPd9q83mVuCA",
+   "addressTag": "",
+   "balance": "25263146418130"
+  },
+  {
+   "holder_address": "TKCsG677WuiUvZo8taPgepVS323v7ymqEL",
+   "addressTag": "",
+   "balance": "25164360400000"
+  },
+  {
+   "holder_address": "TY9y7wcBb2ij7goPKEDqRAm3N2jzbChHHN",
+   "addressTag": "",
+   "balance": "25145822966000"
+  },
+  {
+   "holder_address": "TLawgrKkiT3z4Z6993KLoLCQRhrxMvyNrP",
+   "addressTag": "",
+   "balance": "25116003017014"
+  },
+  {
+   "holder_address": "TS6kcmLB4Nx2R794Es19aXVWjVRyuYLf3Q",
+   "addressTag": "",
+   "balance": "25064210045793"
+  },
+  {
+   "holder_address": "TDo45DXzKcPXLEoPtdUKCWRnTn9EDhwM1i",
+   "addressTag": "",
+   "balance": "25053116708689"
+  },
+  {
+   "holder_address": "TVy2vEAQsgNyfz7SQqsDnH9mCNkmdNiDin",
+   "addressTag": "",
+   "balance": "25015882887554"
+  },
+  {
+   "holder_address": "TUqpTZv2BJvTKCYjW7Tu41mdQvLDqMqh6N",
+   "addressTag": "",
+   "balance": "25000800100000"
+  },
+  {
+   "holder_address": "TC2mvEx6hFCBPtDUbbP2pt221GxdWoN1eU",
+   "addressTag": "",
+   "balance": "25000203000001"
+  },
+  {
+   "holder_address": "TLEiQ3yTXUpfkqQ52p8Ze5knDVS8a5gdyH",
+   "addressTag": "",
+   "balance": "25000000000000"
+  },
+  {
+   "holder_address": "THJdytMvy7pS9ctHNjbirsk336zTbZmvpP",
+   "addressTag": "",
+   "balance": "25000000000000"
+  },
+  {
+   "holder_address": "TGGQXebFRYECEwfS5h64FWLx6bSPWn2sg3",
+   "addressTag": "",
+   "balance": "25000000000000"
+  },
+  {
+   "holder_address": "TQtiTDi5mk1kP1UTzC1ghgvrzp8h1FE5GU",
+   "addressTag": "",
+   "balance": "24963469992466"
+  },
+  {
+   "holder_address": "TJ1qDxLiQNUfecyHXNF8cNRzYYUxmTpwUW",
+   "addressTag": "",
+   "balance": "24919010000000"
+  },
+  {
+   "holder_address": "TEiwQ6EyiiZG1FbaQi5kg47sfaMzsq7mfv",
+   "addressTag": "",
+   "balance": "24855064900110"
+  },
+  {
+   "holder_address": "TBfQTFw2FGf5HNjg811NbSZs1xEKWamYMY",
+   "addressTag": "",
+   "balance": "24628205877255"
+  },
+  {
+   "holder_address": "TPEmockamH1BrgJDmwuMKSpxoTjLBsq93b",
+   "addressTag": "",
+   "balance": "24420211833707"
+  },
+  {
+   "holder_address": "TSUUVjysXV8YqHytSNjfkNXnnB49QDvZpx",
+   "addressTag": "",
+   "balance": "24221942603803"
+  },
+  {
+   "holder_address": "TXoYRiXkBp4HDNcBLSC74aA5hohC7W1NCZ",
+   "addressTag": "",
+   "balance": "23879354000000"
+  },
+  {
+   "holder_address": "TL1v6JwRUKJc1BnrsnLUE155GqE1BYseeN",
+   "addressTag": "",
+   "balance": "23532466284100"
+  },
+  {
+   "holder_address": "TKYqptTcgQjmibSBsHdeuuTYVXHJ3MGLjA",
+   "addressTag": "",
+   "balance": "23483454313703"
+  },
+  {
+   "holder_address": "TA1P1sZJsmCHTpBoF32eUx8rhLaP9jerbe",
+   "addressTag": "",
+   "balance": "23207294973447"
+  },
+  {
+   "holder_address": "TBZStnp88JtdDSMN1oQ8x1gt1rAxawrpNy",
+   "addressTag": "",
+   "balance": "23034495215811"
+  },
+  {
+   "holder_address": "TBhLDEYwDwDp53EttAiRy7ncasL4niZ9qy",
+   "addressTag": "",
+   "balance": "22882703130422"
+  },
+  {
+   "holder_address": "TXow3rD72z8yAdS1FUNJy3r4CEDMvMSha5",
+   "addressTag": "",
+   "balance": "22544945518470"
+  },
+  {
+   "holder_address": "TLdHLc7PiCx765vGYqgKQjeuyZLrHDPdcC",
+   "addressTag": "",
+   "balance": "22500000000000"
+  },
+  {
+   "holder_address": "TQAZFpEMEX2cASugWy7R1k58HExcqYw8TP",
+   "addressTag": "",
+   "balance": "22474268923632"
+  },
+  {
+   "holder_address": "TG8ax1Z2QVzdRyYxVEenBNHvW1FMRvf9n3",
+   "addressTag": "",
+   "balance": "22357554547947"
+  },
+  {
+   "holder_address": "TAvLtsrAjrNn5vRFQwNfNHAodHYyPoKcXo",
+   "addressTag": "",
+   "balance": "22164380400028"
+  },
+  {
+   "holder_address": "TR9ahL7bk9jUKzgsEPdAhssYkKPW6T45N8",
+   "addressTag": "",
+   "balance": "22117585955820"
+  },
+  {
+   "holder_address": "TMRLrsLxJ9rYDvwENQNQAwvM8aXfZvSWAS",
+   "addressTag": "",
+   "balance": "21932676526500"
+  },
+  {
+   "holder_address": "TUv1vNxV3BDpDYQc2mwNiXCDLy4E9JHh3F",
+   "addressTag": "",
+   "balance": "21871404116375"
+  },
+  {
+   "holder_address": "TBa6AN2FpQUJs3dnPZemDjFTB82umXQR9G",
+   "addressTag": "",
+   "balance": "21547965000000"
+  },
+  {
+   "holder_address": "TP5zLFL1Grkyiu8KynvydzQPUmFAbCgtJz",
+   "addressTag": "",
+   "balance": "21422687000000"
+  },
+  {
+   "holder_address": "TWJ35qythKXW2vwuWYS3UFTzmzynG2uCTA",
+   "addressTag": "",
+   "balance": "21124367003253"
+  },
+  {
+   "holder_address": "TYAvbhk7iqNCM68uVxHVXBT8aG7BrDCZHi",
+   "addressTag": "",
+   "balance": "21000006324400"
+  },
+  {
+   "holder_address": "TR4y9zTKhJxSkdq9pvchiZtgQZhD7Bstus",
+   "addressTag": "",
+   "balance": "21000000000000"
+  },
+  {
+   "holder_address": "TKQRWWsjMrs8rjhhUuP1ZfAtfgaXzcwGeP",
+   "addressTag": "",
+   "balance": "20972168741181"
+  },
+  {
+   "holder_address": "TC4pWWuXKnhsubWf9yHGymgC9qPLLYLXCa",
+   "addressTag": "",
+   "balance": "20877100181686"
+  },
+  {
+   "holder_address": "TU7QADrhm2sjU9S6fJy8AjcRBH3749vkSV",
+   "addressTag": "",
+   "balance": "20700003970010"
+  },
+  {
+   "holder_address": "TCz6EGvnQReENwZHdYKrBTo398v1wzNy1i",
+   "addressTag": "",
+   "balance": "20350272690000"
+  },
+  {
+   "holder_address": "TLC5ZSmSMVVhXvZs5xeSSdxsj5tdz3KdpF",
+   "addressTag": "",
+   "balance": "20325870803061"
+  },
+  {
+   "holder_address": "TBx2SUDSi73WW9z14kdWnD8pUhAEpTpMeE",
+   "addressTag": "",
+   "balance": "20076899000000"
+  },
+  {
+   "holder_address": "TVgBK2oSAP8a5SzXn9wdweKbMsuZHFEfT9",
+   "addressTag": "",
+   "balance": "20046352961722"
+  },
+  {
+   "holder_address": "TBuEXtB4Kh6bWZF1WKkg54paS22n1FAvwT",
+   "addressTag": "",
+   "balance": "20004107657010"
+  },
+  {
+   "holder_address": "TL26oCB4vsHswPL2gBqz5ZSwV2uTcvFg9r",
+   "addressTag": "",
+   "balance": "20002001001000"
+  },
+  {
+   "holder_address": "TERwpi8yYsydpk5CwzzvPE7D31YmgDupWw",
+   "addressTag": "",
+   "balance": "20001000000000"
+  },
+  {
+   "holder_address": "TETkMLen17wav9udMXHeFztN71daJmBhub",
+   "addressTag": "",
+   "balance": "20000010958000"
+  },
+  {
+   "holder_address": "TTyjFf7xwLwA6fMwrtBBWTmufZztEj1Fbh",
+   "addressTag": "",
+   "balance": "20000009130005"
+  },
+  {
+   "holder_address": "TFrypgCCdehxEyFJCA3kb34X2iHxp6Ma7t",
+   "addressTag": "",
+   "balance": "20000005671745"
+  },
+  {
+   "holder_address": "TXP66hCnRzRP4ZNbQcNSWcBV4C5JnHK51F",
+   "addressTag": "",
+   "balance": "20000000987384"
+  },
+  {
+   "holder_address": "TCygXZyjDiwjyb8TAC1wRMuu6ijAAWQjbY",
+   "addressTag": "",
+   "balance": "20000000500001"
+  },
+  {
+   "holder_address": "TYXas9JDLppY1ceocDRM1PxxFF69UrjoTx",
+   "addressTag": "",
+   "balance": "20000000000000"
+  },
+  {
+   "holder_address": "TRUKbypBrNq7HYbSnLPss7CwQJL6vzNHti",
+   "addressTag": "",
+   "balance": "20000000000000"
+  },
+  {
+   "holder_address": "TMbiaHiYGYwrV84Hush6j2p39u2HoK2oot",
+   "addressTag": "",
+   "balance": "20000000000000"
+  },
+  {
+   "holder_address": "TMTMSX5C5Ecz8AM86pSTaEMJXtmTJBx91U",
+   "addressTag": "",
+   "balance": "20000000000000"
+  },
+  {
+   "holder_address": "TJQTgvLtKUqMeG1uezSd3ng8GQ5kkrpn8W",
+   "addressTag": "",
+   "balance": "20000000000000"
+  },
+  {
+   "holder_address": "TGKWVYvJYK6cDRB7ssEaF6F1RVq2oicQ7L",
+   "addressTag": "",
+   "balance": "20000000000000"
+  },
+  {
+   "holder_address": "TEMaazWkdPMWuRbdSrHaNNBbunMLcDJLsz",
+   "addressTag": "",
+   "balance": "20000000000000"
+  },
+  {
+   "holder_address": "TWkjokiQomfJrfZcodNmSastMHsKmf4H5z",
+   "addressTag": "",
+   "balance": "19999988618258"
+  },
+  {
+   "holder_address": "TPmxdfvspZfRj9ZkBVUfAvk3PbhoGAAWWs",
+   "addressTag": "",
+   "balance": "19999918987785"
+  },
+  {
+   "holder_address": "TTXc32nXdJMTkWakntMLZS88HUUjn1u4Ev",
+   "addressTag": "",
+   "balance": "19997613124846"
+  },
+  {
+   "holder_address": "TQXrDZbQ2vmT3YALUgMQHd6djzP3JB3ZED",
+   "addressTag": "",
+   "balance": "19939688886998"
+  },
+  {
+   "holder_address": "TNRQEiwP9ZT7CYtKoTjf9dwYfLQxgwgtm3",
+   "addressTag": "",
+   "balance": "19852265000000"
+  },
+  {
+   "holder_address": "TR7KTECSiPS3d5MjaYWxdxH2X2FT6NTXuQ",
+   "addressTag": "",
+   "balance": "19852262000000"
+  },
+  {
+   "holder_address": "TNvYGE6T9G6ZZtem6z7nUDYi2s4wSmV8CH",
+   "addressTag": "",
+   "balance": "19852262000000"
+  },
+  {
+   "holder_address": "TNSQG3ZKkKj4saLLzp4tP4Vsct2coBF1RM",
+   "addressTag": "",
+   "balance": "19852262000000"
+  },
+  {
+   "holder_address": "TKZ9xmtXw1NxajcuyuW2n75BGn8kVsBwcG",
+   "addressTag": "",
+   "balance": "19852262000000"
+  },
+  {
+   "holder_address": "TKSzsMuohg3QCDFB6b6nuRT6ag9doXu256",
+   "addressTag": "",
+   "balance": "19852262000000"
+  },
+  {
+   "holder_address": "TP7inx2EnRvaayKxGXTRjEKneYgd3Hdr4z",
+   "addressTag": "",
+   "balance": "19575749000000"
+  },
+  {
+   "holder_address": "TDuk5xT5vhDPiiGuKUWw98o9zm7Hs31yF1",
+   "addressTag": "",
+   "balance": "19504506336660"
+  },
+  {
+   "holder_address": "TE1hDrg22CjVT926XbxMfJgDgJaJJWV9JW",
+   "addressTag": "",
+   "balance": "19480935000000"
+  },
+  {
+   "holder_address": "TQDRqM2ZNGxYoKVawofqU3UWcAPHtHXTz1",
+   "addressTag": "",
+   "balance": "19382023991000"
+  },
+  {
+   "holder_address": "TMk1NZF9gUeEfBT15o1Y36qSES9GQUPkzY",
+   "addressTag": "",
+   "balance": "19369160372416"
+  }
+ ]
+}

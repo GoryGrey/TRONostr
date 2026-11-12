@@ -38,13 +38,25 @@ nostr:
     eventsPerMinute: 10
     queueSize: 100
 
-# Small read-only JSON API over recent events (for dashboards such as The Tron Report).
+# Small read-only JSON API over recent events, plus the static "The Tron Report" dashboard at "/".
+# In containers set TRONOSTR_API_HOST=0.0.0.0 (the Dockerfile does). PORT is honored too.
 api:
   enabled: true
   host: "127.0.0.1"
   port: 8788
   corsOrigin: "*"
   storeCapacity: 5000
+  dashboard: true
+
+# Persistent history (SQLite via node:sqlite, Node >= 22.13). Powers /api/v1/history and
+# /api/v1/trends. Env overrides: TRONOSTR_DB_PATH, TRONOSTR_RETENTION_DAYS, TRONOSTR_HISTORY=off.
+storage:
+  sqlite:
+    enabled: true
+    path: "./storage/tronostr.db"
+    retentionDays: 30
+    # Per-block telemetry (~28,800 rows/day) only feeds the hourly aggregates unless this is true.
+    storeBlockMetrics: false
 
 output:
   jsonl:
@@ -74,10 +86,12 @@ detectors:
     resources: ["ENERGY", "BANDWIDTH"]
     includeUndelegations: true
 
-  # Inflow/outflow to labeled wallets. No labels ship by default: add only addresses whose
-  # attribution you can cite (e.g. an exchange's published proof-of-reserves wallet list).
+  # Inflow/outflow to labeled wallets. usePublicLabels adds the bundled, source-cited Tronscan public
+  # tags in src/labels/publicLabels.ts (13 addresses; see docs/LABELS.md for caveats). Add your own
+  # entries only if you can cite the attribution (e.g. an exchange's proof-of-reserves list).
   exchangeFlow:
-    enabled: false
+    enabled: true
+    usePublicLabels: true
     trxThreshold: 100000
     usdtThreshold: 50000
     addresses: []

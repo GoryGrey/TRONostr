@@ -14,6 +14,7 @@ import { tronUtilsCases } from './TronUtils.test';
 import { resourceDelegationDetectorCases } from './ResourceDelegationDetector.test';
 import { exchangeFlowDetectorCases } from './ExchangeFlowDetector.test';
 import { apiCases } from './Api.test';
+import { historyCases } from './History.test';
 
 async function main() {
     const suites = [
@@ -32,6 +33,7 @@ async function main() {
         ['ResourceDelegationDetector', resourceDelegationDetectorCases] as const,
         ['ExchangeFlowDetector', exchangeFlowDetectorCases] as const,
         ['Api', apiCases] as const,
+        ['History', historyCases] as const,
     ];
 
     for (const [suiteName, cases] of suites) {

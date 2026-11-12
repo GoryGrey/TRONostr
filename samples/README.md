@@ -28,3 +28,24 @@ TronGrid's independent endpoints (`/v1/transactions/{id}/events` and `/wallet/ge
 All 8 matched.
 
 Addresses that appear here are public on-chain data. No entity attribution is implied.
+
+## Milestone 2 live run (history, trends, dashboard)
+
+`2026-11-12-milestone2-live-run-summary.json` covers a local run of the real entrypoint
+(`node dist/index.js`, shipped defaults: USDT ≥ 100,000, TRX ≥ 1,000,000, delegation ≥ 1,000,000
+staked TRX, 13 public labels) on Nov 12, 2026 from 3:01 to 3:16 PM ET, with restarts in between.
+It used public TronGrid with no API key, read-only, and published nothing.
+
+- 255 blocks processed into one hourly bucket (20:00 UTC): 78,686 transactions, 15,318 USDT
+  transfers, 13,315 delegations and 12,997 undelegations (all sizes, counted per block).
+- SQLite: 471 stored event rows (182 whale USDT transfers totaling 90.17M USDT, 255 large
+  (un)delegations, 34 flows touching labeled wallets) and 0 duplicate rows across restarts.
+- Restarting without a checkpoint left a 35-block gap. Restarting with
+  `TRONOSTR_CHECKPOINT_PATH` resumed at the next block with no gap.
+- Keyless TronGrid returned HTTP 429 three times in the first ~7.5 minutes. After the Watcher
+  pacing/head-block-reuse change: 0 in the next ~4.2 minutes. That is a short window, not proof.
+- The dashboard was rendered in headless Chrome: 6 summary cards, 3 SVG charts, and populated
+  tables.
+
+`*-phase1-live-history.json` and `*-phase2-after-restart.json` are raw snapshots written by
+`npm run report:history` against the running instance.

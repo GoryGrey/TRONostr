@@ -3,6 +3,47 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versions follow SemVer.
 
+## [1.2.0] - Unreleased (milestone 2)
+
+### Added
+- `SqliteEventStore`: persistent history on SQLite through the built-in `node:sqlite` (no native
+  build step). It extends `EventStore`, reloads recent rows on restart, keeps incremental hourly
+  aggregates, and prunes on a retention window (`storage.sqlite.retentionDays`, default 30). It is
+  configured in the new `storage.sqlite` config block, with `TRONOSTR_DB_PATH`,
+  `TRONOSTR_RETENTION_DAYS` and `TRONOSTR_HISTORY` overrides.
+- New API endpoints: `/api/v1/history` (filters and cursor pagination), `/api/v1/history/stats`,
+  `/api/v1/trends?hours=` (zero-filled hourly buckets), and `/api/v1/labels`.
+- The Tron Report live dashboard at `/`: static HTML, CSS and JS with inline SVG charts, no
+  third-party scripts, a strict CSP, and an explicit non-affiliation notice. It can be turned off
+  with `api.dashboard: false`.
+- `BlockMetricsDetector` per-block activity counts over all successful transactions:
+  `trxTransfers`, `usdtTransfers`, `delegations`, `undelegations`, `energyDelegations`, `failedTx`.
+- 13 bundled exchange and issuer labels taken from Tronscan public tags, with the source cited in
+  code and committed evidence (`src/labels/publicLabels.ts`, `docs/LABELS.md`). They are enabled
+  with `exchangeFlow.usePublicLabels`.
+- Dedicated Nostr publisher key: `TRONOSTR_PUBLISHER_KEY` (hex or nsec) or
+  `TRONOSTR_PUBLISHER_KEY_FILE`. The key is validated, never logged, and only the npub is printed.
+- `Dockerfile`, `.dockerignore`, `docs/DEPLOY.md` (hosting comparison and runbook), and
+  `docs/LABELS.md`.
+- `PORT` is honored for the API port, matching PaaS conventions.
+- `TRONOSTR_CHECKPOINT_PATH` turns on resume-after-restart without editing config. The Docker image
+  sets it to `/data/checkpoints.json`.
+- `npm run report:history -- --url <api>`: a read-only, numbers-only snapshot of a running instance,
+  written to `samples/`.
+- 12 new tests (67 total).
+
+### Changed
+- `engines.node` is now `>= 22.13`, because `node:sqlite` is unflagged there.
+- `config.yaml` enables `exchangeFlow` with the bundled public labels by default.
+- `NOSTR_PRIVATE_KEY` is deprecated in favour of `TRONOSTR_PUBLISHER_KEY` and still works.
+- On shutdown the API now closes before the runtime and store.
+- Watcher reuses the full head block returned by `getCurrentBlock` instead of downloading it again,
+  which roughly halves steady-state TronGrid calls. It also paces catch-up `getBlock` calls with
+  `minRequestIntervalMs` (default 400 ms without an API key, 0 with one). Both changes came from a
+  live run where keyless TronGrid returned HTTP 429 three times in about 7.5 minutes.
+- Runtime errors are logged as one line (message, HTTP status, server detail) instead of the full
+  HTTP client object.
+
 ## [1.1.0] - Unreleased
 
 ### Added

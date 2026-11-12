@@ -1,0 +1,16 @@
+node_modules
+dist
+storage
+samples
+launch
+assets
+docs
+examples
+.git
+.env
+.env.*
+!.env.example
+*.log
+*.tgz
+*.db
+*.db-*

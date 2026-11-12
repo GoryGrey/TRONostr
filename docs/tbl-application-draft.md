@@ -54,8 +54,10 @@ waitlist features:
 | Stablecoin rail / USDT flow | `usdt_transfer` + `/api/v1/summary` volume and top senders/receivers | **working** |
 | Whale heatmap | `trx_transfer`, `usdt_transfer` with severity tiers | **working** |
 | Energy / resource market (TRON-native) | `resource_delegation` (Stake 2.0 ENERGY/BANDWIDTH) | **working, new in v1.1.0** |
-| Exchange in/outflow | `exchange_flow` with a source-cited address book | **code works; no labels yet** |
-| Network telemetry | `block_metrics` (transactions per block, witness) | **working** |
+| Exchange in/outflow | `exchange_flow` with 13 bundled Tronscan public-tag labels (source cited, evidence committed) | **working locally (v1.2.0); lower bound only** |
+| Network telemetry | `block_metrics` (transactions per block, witness, per-block activity counts) | **working** |
+| History + hourly trends | SQLite store, `/api/v1/history`, `/api/v1/trends` (30-day retention) | **working locally (v1.2.0)** |
+| Live dashboard | static The Tron Report page served by the API at `/` | **working locally (v1.2.0); not hosted yet** |
 | Compliance flagging, DEX/SunPump, governance feed | none yet | milestone 3+ |
 | Price / market data | out of scope for TRONostr (third-party price feeds) | n/a |
 
@@ -76,9 +78,10 @@ waitlist features:
 
 ## Expected completion and current progress
 
-- **Current progress:** about 40% toward a "public, hosted data feed + dashboard MVP". This is an
-  honest estimate of the engine, tests, API and packaging done versus hosting, labels,
-  history/storage and the dashboard not started. **[YOU: adjust]**
+- **Current progress:** about 65% toward a "public, hosted data feed + dashboard MVP". History
+  storage, trend endpoints, the dashboard page, cited labels, a Dockerfile and deploy docs work
+  locally (v1.2.0, 67 tests). It is **not yet hosted**, nothing has been published to Nostr under a
+  dedicated key, and there is no npm release, demo video or users yet. **[YOU: adjust]**
 - Engine status (v1.1.0, local): 5 event types, 4 detectors, 55 passing unit tests, read-only JSON
   API, npm-ready package (dry-run pack verified, not published), 0 `npm audit` advisories in
   production dependencies.

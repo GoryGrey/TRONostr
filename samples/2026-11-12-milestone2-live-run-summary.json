@@ -1,0 +1,63 @@
+{
+  "note": "Milestone-2 local live run of `node dist/index.js` (shipped config.yaml defaults) against TRON mainnet via public TronGrid: read-only, no API key, no Nostr key, nothing published. All numbers were read from the run logs, the SQLite file, and the HTTP API. Nothing is synthetic. No screenshots.",
+  "host": "Linux box, Node v24.22.1, local 127.0.0.1:8799",
+  "wallClock": { "startEastern": "Nov 12, 2026 3:01:12 PM EST", "endEastern": "Nov 12, 2026 3:16:20 PM EST" },
+  "thresholds": { "whaleUsdt": 100000, "whaleTrx": 1000000, "delegationStakedTrx": 1000000, "exchangeFlowTrx": 100000, "exchangeFlowUsdt": 50000, "publicLabels": 13 },
+  "phases": [
+    { "name": "phase1", "blocks": "87946609-87946732", "count": 124, "contiguous": true, "approxMinutes": 7.5, "tronGrid429Errors": 3, "backoffs": "3 (3.2s, 6.2s, 12.1s)", "build": "before Watcher pacing fix" },
+    { "name": "phase2 (restart, same DB, no checkpoint)", "blocks": "87946768-87946857", "count": 90, "contiguous": true, "approxMinutes": 4.2, "tronGrid429Errors": 0, "reloadedOnStart": 239, "build": "with head-block reuse + catch-up pacing" },
+    { "name": "phase3 attempt on stale build (checkpoint env not yet compiled)", "blocks": "87946859-87946867 and 87946873-87946881", "count": 18, "note": "counted in the DB totals below" },
+    { "name": "phase3a (checkpoint on)", "blocks": "87946885-87946893", "count": 9, "checkpointSaved": 87946893 },
+    { "name": "phase3b (restart after ~18s, checkpoint restored)", "blocks": "87946894-87946907", "count": 14, "contiguous": true, "resumedFrom": 87946893, "gapAcrossRestart": 0 }
+  ],
+  "gapsInHistory": [
+    "87946733-87946767 (35 blocks, phase1->phase2 restart without checkpoint)",
+    "87946858, 87946868-87946872, 87946882-87946884 (between phases)"
+  ],
+  "sqliteFinal": {
+    "fileBytes": 544768,
+    "eventRows": 471,
+    "eventRowsByType": { "usdt_transfer": 182, "resource_delegation": 255, "exchange_flow": 34 },
+    "duplicateTxRows": 0,
+    "eventTimeRangeUtc": ["2026-11-12T20:00:01Z", "2026-11-12T20:16:10Z"],
+    "hourlyBucket_2026-11-12T20:00Z": {
+      "blocks": 255,
+      "txCount": 78686,
+      "trxTransfers_all": 23150,
+      "usdtTransfers_all": 15318,
+      "delegations_all": 13315,
+      "undelegations_all": 12997,
+      "energyDelegations_all": 11094,
+      "whaleUsdtCount": 182,
+      "whaleUsdtVolume": 90167325.84,
+      "whaleTrxCount": 0,
+      "whaleDelegationCount": 126,
+      "whaleDelegatedTrx": 275452766.12,
+      "whaleUndelegationCount": 129,
+      "whaleUndelegatedTrx": 285139606.12,
+      "exchangeFlowCount": 34,
+      "exchangeInflowUsdt_labeledWalletsOnly": 8236213.33,
+      "exchangeOutflowUsdt_labeledWalletsOnly": 5670819.72
+    }
+  },
+  "dashboardCheck": {
+    "method": "headless Chrome --dump-dom against http://127.0.0.1:8799/ during phase2",
+    "renderedAt": "2026-11-12T20:13:37Z",
+    "cards": {
+      "Whale USDT transfers (1h)": "142",
+      "Whale USDT volume (1h)": "$76,756,863",
+      "Largest USDT transfer (1h)": "$20,046,343",
+      "Large energy delegations (1h)": "199",
+      "All delegations, this hour so far (UTC)": "11,417",
+      "Avg tx per block (1h)": "268"
+    },
+    "svgCharts": 3,
+    "tableRows": { "latestWhaleTransfers": 8, "largeDelegations": 10, "labeledExchangeFlows": 5 },
+    "payloadBytes": { "html": 3199, "js": 5982, "css": 2034, "trends24h": 10467 }
+  },
+  "memory": { "rssMBAfter2.6min": 121, "cpuPercent": 1.1 },
+  "relatedFiles": [
+    "2026-11-12T20-07-25-738Z-phase1-live-history.json",
+    "2026-11-12T20-13-38-339Z-phase2-after-restart.json"
+  ]
+}

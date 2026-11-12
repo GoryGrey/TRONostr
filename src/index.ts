@@ -7,9 +7,11 @@ import { TRONostrOutputTransport, TRONostrRuntime } from './runtime/TRONostrRunt
 import { TRONostrStatusTracker } from './runtime/StatusTracker';
 import { WebhookOutput } from './output/WebhookOutput';
 import { EventStore } from './output/EventStore';
+import { SqliteEventStore } from './output/SqliteEventStore';
+import { resolvePublisherKey } from './nostr/publisherKey';
 import { JsonlFileOutput } from './output/JsonlFileOutput';
 import { ApiServer } from './api/ApiServer';
-import { buildDetectors, loadConfig } from './config';
+import { buildDetectors, loadConfig, resolveStorageConfig } from './config';
 import { formatBanner, formatEventSummary, formatStatusSnapshot } from './cli/format';
 
 dotenv.config();
@@ -23,27 +25,35 @@ async function main() {
     ));
 
     // Nostr publishing is the default transport, but it is optional: without a key TRONostr runs
-    // in read-only "local" mode (HTTP API / JSONL / webhook only) and signs nothing.
-    const nostrEnabled = config.nostr?.enabled !== false && Boolean(process.env.NOSTR_PRIVATE_KEY);
+    // in read-only "local" mode (HTTP API / JSONL / webhook) and signs nothing. The key comes only
+    // from the environment (TRONOSTR_PUBLISHER_KEY, TRONOSTR_PUBLISHER_KEY_FILE, or legacy
+    // NOSTR_PRIVATE_KEY) and is never logged; only the derived npub is printed.
+    const publisherKey = config.nostr?.enabled !== false ? resolvePublisherKey() : undefined;
     let publisher: Publisher | undefined;
-    if (nostrEnabled) {
+    if (publisherKey) {
+        if (publisherKey.sourceVar === 'NOSTR_PRIVATE_KEY') {
+            console.warn('NOSTR_PRIVATE_KEY is deprecated; use TRONOSTR_PUBLISHER_KEY (a key used only for this publisher).');
+        }
         publisher = new Publisher({
             relays: config.nostr.relays,
-            privateKey: process.env.NOSTR_PRIVATE_KEY!,
+            privateKey: publisherKey.secretHex,
             kindRange: config.nostr.kindRange,
             rateLimit: config.nostr.rateLimit,
             reconnect: config.nostr.reconnect,
         });
-        console.log(`Enabled: Nostr publisher -> ${config.nostr.relays.length} relay(s)`);
+        console.log(`Enabled: Nostr publisher ${publisherKey.npub} -> ${config.nostr.relays.length} relay(s)`);
     } else {
-        console.log('Nostr publishing disabled (no NOSTR_PRIVATE_KEY set or nostr.enabled=false). Running in local mode.');
+        console.log('Nostr publishing disabled (no TRONOSTR_PUBLISHER_KEY set or nostr.enabled=false). Running in local mode.');
     }
 
     const detectors = buildDetectors(config, (msg) => console.log(msg));
 
-    const checkpointStore = config.tron.checkpoint?.enabled
-        ? new FileCheckpointStore(config.tron.checkpoint.path)
-        : undefined;
+    // TRONOSTR_CHECKPOINT_PATH enables resume-after-restart without editing config.yaml (the Docker
+    // image sets it to /data), so restarts and deploys catch up instead of leaving history gaps.
+    const checkpointPath = process.env.TRONOSTR_CHECKPOINT_PATH
+        || (config.tron.checkpoint?.enabled ? config.tron.checkpoint.path : undefined);
+    const checkpointStore = checkpointPath ? new FileCheckpointStore(checkpointPath) : undefined;
+    if (checkpointPath) console.log(`Enabled: block checkpoint -> ${checkpointPath}`);
 
     const watcher = new Watcher({
         fullHost: config.tron.fullHost,
@@ -59,8 +69,20 @@ async function main() {
     });
 
     const outputs: TRONostrOutputTransport[] = [];
-    const store = new EventStore({ capacity: config.api?.storeCapacity ?? 5000 });
+    const storage = resolveStorageConfig(config);
+    const store = storage.enabled
+        ? new SqliteEventStore({
+            path: storage.path,
+            retentionDays: storage.retentionDays,
+            storeBlockMetrics: storage.storeBlockMetrics,
+            capacity: config.api?.storeCapacity ?? 5000,
+        })
+        : new EventStore({ capacity: config.api?.storeCapacity ?? 5000 });
     outputs.push(store);
+    if (store instanceof SqliteEventStore) {
+        const stats = store.stats();
+        console.log(`Enabled: SQLite history -> ${storage.path} (retention ${storage.retentionDays}d, ${stats.eventRows} stored event(s) reloaded up to ${store.size()})`);
+    }
 
     if (config.output?.webhook?.enabled) {
         outputs.push(new WebhookOutput(config.output.webhook));
@@ -87,12 +109,17 @@ async function main() {
             store,
             getStatus: () => runtime.getStatusSnapshot(),
             host: process.env.TRONOSTR_API_HOST || config.api?.host,
-            port: process.env.TRONOSTR_API_PORT ? Number(process.env.TRONOSTR_API_PORT) : config.api?.port,
+            // PORT is what most PaaS hosts (Render, Fly, Railway) inject.
+            port: process.env.TRONOSTR_API_PORT ? Number(process.env.TRONOSTR_API_PORT) : process.env.PORT ? Number(process.env.PORT) : config.api?.port,
             corsOrigin: config.api?.corsOrigin,
             kindRange: config.nostr.kindRange,
+            history: store instanceof SqliteEventStore ? store : undefined,
+            dashboard: config.api?.dashboard !== false,
+            publicLabelsEnabled: config.detectors?.exchangeFlow?.enabled === true && config.detectors?.exchangeFlow?.usePublicLabels === true,
         });
         const { host, port } = await api.listen();
         console.log(`Enabled: JSON API -> http://${host}:${port}/api/v1/summary`);
+        if (config.api?.dashboard !== false) console.log(`Enabled: dashboard -> http://${host}:${port}/`);
     }
 
     runtime.on('event', (event) => {
@@ -105,8 +132,11 @@ async function main() {
         }
     });
 
-    runtime.on('error', (err) => {
-        console.error('Runtime Error:', err);
+    runtime.on('error', (err: any) => {
+        // Keep logs readable: HTTP client errors carry huge request objects.
+        const status = err?.response?.status;
+        const detail = err?.response?.data?.Error ?? err?.response?.data?.error;
+        console.error(`Runtime Error: ${err?.message ?? String(err)}${status ? ` (HTTP ${status})` : ''}${detail ? ` - ${String(detail).slice(0, 160)}` : ''}`);
     });
 
     runtime.on('state', (state) => {
@@ -122,8 +152,8 @@ async function main() {
         }
         shuttingDown = true;
         console.log(`Received ${signal}. Shutting down TRONostr...`);
-        await runtime.stop();
         await api?.close();
+        await runtime.stop();
         const snapshot = runtime.getStatusSnapshot();
         if (snapshot) {
             console.log(formatStatusSnapshot(snapshot));

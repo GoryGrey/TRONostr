@@ -153,4 +153,50 @@ export const watcherCases: TestCase[] = [
             assert.equal(watcher.getLastBlockNum(), 10);
         },
     },
+    {
+        name: 'reuses the full head block and paces catch-up requests',
+        run: async () => {
+            const getBlockCalls: number[] = [];
+            const sleeps: number[] = [];
+            const head = { ...createFakeBlock(12), transactions: [] as any[] };
+            const watcher = new Watcher({
+                fullHost: 'unused',
+                eventServer: 'unused',
+                startBlock: 9,
+                tronWeb: {
+                    trx: {
+                        async getCurrentBlock() {
+                            return head;
+                        },
+                        async getBlock(blockNum: number) {
+                            getBlockCalls.push(blockNum);
+                            return createFakeBlock(blockNum);
+                        },
+                    },
+                },
+                sleep: async (ms: number) => {
+                    sleeps.push(ms);
+                },
+                jitterMs: 0,
+                minRequestIntervalMs: 400,
+                logger: createLoggerSpy().logger,
+            });
+            const seen: number[] = [];
+            const done = new Promise<void>((resolve) => {
+                watcher.on('block', (block) => {
+                    seen.push(block.block_header.raw_data.number);
+                    if (block.block_header.raw_data.number === 12) {
+                        resolve();
+                        void watcher.stop();
+                    }
+                });
+            });
+            await watcher.start();
+            await done;
+            await watcher.stop();
+            assert.deepEqual(seen, [10, 11, 12]);
+            assert.deepEqual(getBlockCalls, [10, 11], 'head block 12 is not downloaded twice');
+            assert.equal(sleeps.filter((ms) => ms === 400).length, 1, 'one pacing gap between the two catch-up fetches');
+        },
+    },
 ];

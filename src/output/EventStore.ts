@@ -37,7 +37,7 @@ const SEVERITY_RANK = { info: 0, low: 1, medium: 2, high: 3, critical: 4 } as co
  * rolled-up summary without running a relay client.
  */
 export class EventStore {
-    private readonly capacity: number;
+    protected readonly capacity: number;
     private readonly events: StoredEvent[] = [];
 
     constructor(options: { capacity?: number } = {}) {

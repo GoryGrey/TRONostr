@@ -1,6 +1,6 @@
 {
   "name": "tronostr",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Open realtime TRON event infrastructure: whale transfers, USDT-TRC20 moves, energy/bandwidth delegations and exchange flows as structured events over Nostr, a local JSON API, JSONL, and webhooks.",
   "keywords": [
     "ai-agents",
@@ -67,6 +67,10 @@
       "types": "./dist/output/EventStore.d.ts",
       "default": "./dist/output/EventStore.js"
     },
+    "./history": {
+      "types": "./dist/output/SqliteEventStore.d.ts",
+      "default": "./dist/output/SqliteEventStore.js"
+    },
     "./package.json": "./package.json"
   },
   "bin": {
@@ -80,7 +84,7 @@
     "LICENSE"
   ],
   "engines": {
-    "node": ">=22"
+    "node": ">=22.13"
   },
   "scripts": {
     "build": "npm run clean && tsc -p tsconfig.json",
@@ -97,7 +101,8 @@
     "sample": "ts-node src/sample.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "prepublishOnly": "npm run build && npm test",
-    "pack:check": "npm run build && npm pack --dry-run"
+    "pack:check": "npm run build && npm pack --dry-run",
+    "report:history": "ts-node src/historyReport.ts"
   },
   "dependencies": {
     "dotenv": "^17.2.3",

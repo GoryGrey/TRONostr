@@ -31,3 +31,12 @@ export type { ResourceDelegationConfig } from './detectors/ResourceDelegationDet
 export type { ExchangeFlowConfig, LabeledAddress } from './detectors/ExchangeFlowDetector';
 export type { EventQuery, EventSummary, StoredEvent } from './output/EventStore';
 export type { ApiServerOptions } from './api/ApiServer';
+export { SqliteEventStore } from './output/SqliteEventStore';
+export type { SqliteEventStoreOptions, HistoryQuery, HistoryRow, HourlyBucket, HistoryStats } from './output/SqliteEventStore';
+export type { HistoryProvider } from './api/ApiServer';
+export { resolvePublisherKey } from './nostr/publisherKey';
+export type { ResolvedPublisherKey } from './nostr/publisherKey';
+export { PUBLIC_LABELS, mergeLabels, TRONSCAN_TAG_SOURCE } from './labels/publicLabels';
+export type { PublicLabel } from './labels/publicLabels';
+export { resolveStorageConfig } from './config';
+export type { BlockMetricsConfig } from './detectors/BlockMetricsDetector';
