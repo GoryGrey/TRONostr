@@ -8,3 +8,9 @@ yarn-debug.log*
 yarn-error.log*
 storage/
 *.tgz
+.env.*
+!.env.example
+*.db
+*.db-*
+*.sqlite
+samples/screenshots/
