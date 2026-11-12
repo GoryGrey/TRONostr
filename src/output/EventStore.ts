@@ -26,7 +26,8 @@ export interface EventSummary {
     topSenders: Array<{ address: string; asset: string; total: number; count: number }>;
     topReceivers: Array<{ address: string; asset: string; total: number; count: number }>;
     resourceDelegation: Record<string, { delegatedTrx: number; undelegatedTrx: number; count: number }>;
-    exchangeFlows: Record<string, { asset: string; inflow: number; outflow: number; net: number; count: number }>;
+    /** Keyed by "<entity>:<asset>". Entity labels may themselves contain colons, so read `entity`, not the key. */
+    exchangeFlows: Record<string, { entity: string; asset: string; inflow: number; outflow: number; net: number; count: number }>;
 }
 
 const SEVERITY_RANK = { info: 0, low: 1, medium: 2, high: 3, critical: 4 } as const;
@@ -120,7 +121,7 @@ export class EventStore {
 
             if (event.eventType === 'exchange_flow' && event.asset) {
                 const key = `${d.entity}:${event.asset}`;
-                const f = exchangeFlows[key] ?? { asset: event.asset, inflow: 0, outflow: 0, net: 0, count: 0 };
+                const f = exchangeFlows[key] ?? { entity: String(d.entity), asset: event.asset, inflow: 0, outflow: 0, net: 0, count: 0 };
                 f.count += 1;
                 if (d.direction === 'inflow') f.inflow = round(f.inflow + Number(d.amount));
                 if (d.direction === 'outflow') f.outflow = round(f.outflow + Number(d.amount));

@@ -167,7 +167,7 @@ rate limited per relay and queue-bounded.
 
 | command | network? | purpose |
 | --- | --- | --- |
-| `npm test` | no | 67 unit tests (custom runner) |
+| `npm test` | no | 69 unit tests (custom runner) |
 | `npm run report:history -- --url http://127.0.0.1:8788` | local API (read) | numbers-only snapshot of a running instance -> `samples/` |
 | `npm run typecheck` | no | `tsc --noEmit` |
 | `npm run smoke` / `showcase` / `demo:status` | no | deterministic demos with an in-memory relay |

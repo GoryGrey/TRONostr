@@ -82,7 +82,7 @@ main{padding:18px 24px;display:flex;flex-direction:column;gap:16px;max-width:128
 .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:16px}
 table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}th{color:var(--muted);font-weight:500}
 .r{text-align:right}.muted{color:var(--muted)}.small{font-size:12px;margin:-4px 0 8px}.mono{font-family:ui-monospace,Menlo,monospace;font-size:12px}
-.chart svg{width:100%;height:160px;display:block}.chart .empty{color:var(--muted);padding:40px 0;text-align:center}
+.chart svg{width:100%;height:160px;display:block}.chart-label{color:var(--muted);font-size:12px;margin:0 0 4px}.chart .empty{color:var(--muted);padding:40px 0;text-align:center}
 .sev-high{color:var(--accent);font-weight:600}footer{padding:16px 24px 32px;color:var(--muted);font-size:12px;max-width:1280px;margin:0 auto}
 @media (max-width:520px){.grid2{grid-template-columns:1fr}header{flex-direction:column;align-items:flex-start}}
 `;
@@ -112,7 +112,9 @@ function barChart(container, buckets, key, color, unit){
     r.setAttribute('x', String(pad+i*bw+1)); r.setAttribute('y', String(H-pad-h)); r.setAttribute('width', String(Math.max(bw-2,1))); r.setAttribute('height', String(h)); r.setAttribute('fill', color);
     var t=document.createElementNS(NS,'title'); t.textContent=buckets[i].hourIso.slice(0,13).replace('T',' ')+':00 UTC  '+fmt(v, 2)+(unit?' '+unit:''); r.appendChild(t); svg.appendChild(r);
   });
-  var lbl=document.createElementNS(NS,'text'); lbl.setAttribute('x', String(pad)); lbl.setAttribute('y','12'); lbl.setAttribute('fill','#8a93a6'); lbl.setAttribute('font-size','11'); lbl.textContent='max '+fmt(max)+(unit?' '+unit:'')+' / hour'; svg.appendChild(lbl);
+  // The SVG stretches to the panel width (preserveAspectRatio none), which would distort text, so
+  // the label is plain HTML above the chart and keeps the page's normal font size.
+  container.appendChild(el('div', 'max '+fmt(max)+(unit?' '+unit:'')+' / hour', 'chart-label'));
   container.appendChild(svg);
 }
 
@@ -155,7 +157,7 @@ function refresh(){
     fillTable($('delegs'), del.map(function(x){var d=x.event.data;
       return [td(time(x.created_at)), td(d.action), td(d.resource), td(fmt(d.stakedTrx), 'r'), tdNode(txLink(x.event.transaction&&x.event.transaction.hash))];}), 'no large delegations stored yet', 5);
 
-    var flows=Object.keys(s.exchangeFlows||{}).map(function(k){var f=s.exchangeFlows[k]; return [td(k.split(':')[0]), td(f.asset), td(fmt(f.inflow),'r'), td(fmt(f.outflow),'r'), td(fmt(f.net),'r')];});
+    var flows=Object.keys(s.exchangeFlows||{}).map(function(k){var f=s.exchangeFlows[k]; return [td(f.entity || k.slice(0, k.lastIndexOf(':'))), td(f.asset), td(fmt(f.inflow),'r'), td(fmt(f.outflow),'r'), td(fmt(f.net),'r')];});
     fillTable($('flows'), flows, 'no labeled flows in window', 5);
 
     if(hours.length){

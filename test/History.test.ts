@@ -344,4 +344,31 @@ export const historyCases: TestCase[] = [
             assert.throws(() => resolveStorageConfig({ storage: { sqlite: { retentionDays: 'x' } } }, {}), /between 1 and 365/);
         },
     },
+    {
+        name: 'summary keeps full exchange labels that contain colons',
+        run: () => {
+            const kraken = PUBLIC_LABELS.find((l) => l.label === 'Kraken: Hot Wallet')!;
+            const detector = new ExchangeFlowDetector({ addresses: mergeLabels([], true), trxThreshold: 100, usdtThreshold: 100, usdtContract: TEST_USDT_CONTRACT });
+            const tx = createTrxTransferTx(500) as any;
+            tx.raw_data.contract[0].parameter.value.to_address = TronWeb.address.toHex(kraken.address).toLowerCase();
+            const store = new EventStore();
+            for (const insight of detector.onTransaction(tx)) store.add(prepareTRONostrEvent(insight, TEST_KIND_RANGE));
+            const flows = store.summary().exchangeFlows;
+            const entry = flows['Kraken: Hot Wallet:TRX'];
+            assert.ok(entry, 'keyed by entity:asset');
+            assert.equal(entry.entity, 'Kraken: Hot Wallet');
+            assert.equal(entry.inflow, 500);
+        },
+    },
+    {
+        name: 'dashboard renders chart labels as HTML and does not split entity names',
+        run: () => {
+            const { DASHBOARD_JS, DASHBOARD_CSS } = require('../src/dashboard/assets');
+            assert.doesNotMatch(DASHBOARD_JS, /createElementNS\(NS,\s*'text'\)/, 'no SVG <text> inside the stretched chart');
+            assert.match(DASHBOARD_JS, /'chart-label'/);
+            assert.match(DASHBOARD_CSS, /\.chart-label\{/);
+            assert.doesNotMatch(DASHBOARD_JS, /split\(':'\)/);
+            assert.match(DASHBOARD_JS, /f\.entity/);
+        },
+    },
 ];

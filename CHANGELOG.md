@@ -30,7 +30,7 @@ All notable changes to this project are documented here. Format follows
   sets it to `/data/checkpoints.json`.
 - `npm run report:history -- --url <api>`: a read-only, numbers-only snapshot of a running instance,
   written to `samples/`.
-- 12 new tests (67 total).
+- 14 new tests (69 total).
 
 ### Changed
 - `engines.node` is now `>= 22.13`, because `node:sqlite` is unflagged there.
@@ -41,6 +41,9 @@ All notable changes to this project are documented here. Format follows
   which roughly halves steady-state TronGrid calls. It also paces catch-up `getBlock` calls with
   `minRequestIntervalMs` (default 400 ms without an API key, 0 with one). Both changes came from a
   live run where keyless TronGrid returned HTTP 429 three times in about 7.5 minutes.
+- Dashboard: chart "max / hour" labels are HTML above each chart instead of SVG text, so they no
+  longer stretch or shrink with the chart. Exchange-flow rows show the full entity label (e.g.
+  "Kraken: Hot Wallet"). `/summary` `exchangeFlows` entries now include an `entity` field.
 - Runtime errors are logged as one line (message, HTTP status, server detail) instead of the full
   HTTP client object.
 

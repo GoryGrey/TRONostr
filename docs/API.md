@@ -39,7 +39,7 @@ Rolls up the stored window:
 - `transferVolume[asset]`: count, total, largest (whale-threshold transfers only)
 - `topSenders` / `topReceivers`: by summed amount, per asset
 - `resourceDelegation[ENERGY|BANDWIDTH]`: delegatedTrx, undelegatedTrx, count
-- `exchangeFlows["<entity>:<asset>"]`: inflow, outflow, net, count
+- `exchangeFlows["<entity>:<asset>"]`: entity (full label; labels can contain colons), asset, inflow, outflow, net, count
 
 ## `GET /api/v1/status`
 The runtime status snapshot: latest block seen, event counts, alerts, and publisher queue and
