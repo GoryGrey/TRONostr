@@ -141,6 +141,17 @@ export class Watcher extends EventEmitter {
                 if (tx.raw_data && !tx.raw_data.timestamp) {
                     tx.raw_data.timestamp = block.block_header.raw_data.timestamp;
                 }
+                // Attach block context so detectors can include block metadata in their events.
+                if (!tx.tronostrBlock) {
+                    Object.defineProperty(tx, 'tronostrBlock', {
+                        value: {
+                            height: block.block_header.raw_data.number,
+                            hash: block.blockID,
+                            timestamp: block.block_header.raw_data.timestamp,
+                        },
+                        enumerable: false,
+                    });
+                }
                 this.emit('transaction', tx);
             }
         }

@@ -34,4 +34,15 @@ export const schemaCases: TestCase[] = [
             assert.ok(result.errors[0].startsWith('invalid JSON:'));
         },
     },
+    {
+        name: 'validates resource_delegation and exchange_flow payload rules',
+        run: () => {
+            const base = { schema: 'tronostr.v1', chain: 'tron', severity: 'medium', source: { detector: 'T' }, transaction: { hash: 'h' } };
+            assert.equal(validateTRONostrEventContent({ ...base, category: 'resource', eventType: 'resource_delegation', asset: 'TRX', data: { action: 'delegate', resource: 'ENERGY', stakedTrx: 1 } }).ok, true);
+            const badResource = validateTRONostrEventContent({ ...base, category: 'resource', eventType: 'resource_delegation', asset: 'TRX', data: { action: 'delegate', resource: 'CPU' } });
+            assert.equal(badResource.ok, false);
+            assert.equal(validateTRONostrEventContent({ ...base, category: 'flow', eventType: 'exchange_flow', asset: 'USDT', data: { direction: 'inflow' } }).ok, true);
+            assert.equal(validateTRONostrEventContent({ ...base, category: 'flow', eventType: 'exchange_flow', asset: 'USDT', data: { direction: 'sideways' } }).ok, false);
+        },
+    },
 ];

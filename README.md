@@ -2,308 +2,144 @@
 
 ![TRONostr banner](./TRONostr%20banner%20image.png)
 
-TRONostr is open realtime TRON telemetry infrastructure. It watches TRON activity, turns raw chain data into structured machine-readable events, and distributes those events over Nostr as the first/default transport, with optional webhook mirroring for secondary delivery.
+TRONostr is open, realtime TRON event infrastructure. It watches TRON mainnet blocks, turns raw
+transactions into structured, machine-readable events (whale TRX moves, USDT-TRC20 transfers,
+Stake 2.0 energy/bandwidth delegations, flows to labeled wallets, block telemetry), and delivers
+them over:
 
-Builders can use it to feed bots, dashboards, alerting pipelines, and automation that need clean TRON signals without running a custom TRON ingestion stack.
+- **Nostr relays** (signed events, kinds 6500–6504), the default public transport
+- a **local read-only JSON API** that a dashboard can poll
+- **JSONL files** for archiving and replay
+- **webhooks** for existing pipelines
 
-## Who It's For
+It is the data engine planned for **The Tron Report**, a TRON analytics and research platform.
 
-- teams building TRON bots or alerting systems
-- dashboards that need block and transfer telemetry
-- services that want machine-readable TRON events over relays or webhooks
-- ecosystem teams evaluating reusable TRON infrastructure primitives
+> Status: pre-release (v1.1.0, not yet published to npm). Everything below runs today on a laptop
+> against public TronGrid with no API key. See `samples/` for real captured mainnet output.
 
-## Why This Matters
+## Quickstart
 
-TRON activity is easy to query badly and expensive to normalize repeatedly. TRONostr already ships the practical pieces most downstream systems need:
-
-- stable event kinds and a shared schema
-- runtime validation at publish and consume boundaries
-- relay distribution over Nostr
-- optional webhook mirroring
-- deterministic local showcase and smoke paths
-
-## Architecture
-
-TRONostr is split into five small layers:
-
-1. `Watcher`
-   Polls TRON blocks and transactions with backoff, jitter, and optional checkpoint restore.
-2. `Detectors`
-   Convert raw TRON activity into structured insights such as `block_metrics`, `trx_transfer`, and `usdt_transfer`.
-3. `Publisher`
-   Signs and publishes validated TRONostr events to configured Nostr relays.
-4. `Optional outputs`
-   Mirror the same event envelope to secondary sinks such as webhooks.
-5. `TRONostrClient`
-   Subscribes by deterministic kinds and validates/parses repo-native JSON client-side.
-
-```text
-TRON node / TronGrid
-        |
-        v
-     Watcher
-        |
-        v
-    Detectors
-        |
-        v
-  structured events
-        |
-        v
- Publisher / outputs
-        |
-        v
- relays / webhook sinks
-        |
-        v
- bots / dashboards / agents / services
-```
-
-Stable kind mapping:
-
-- `6500`: `block_metrics`
-- `6501`: `trx_transfer`
-- `6502`: `usdt_transfer`
-
-Schema version:
-
-- `tronostr.v1`
-
-Core event fields:
-
-- `schema`
-- `chain`
-- `category`
-- `eventType`
-- `asset`
-- `severity`
-- `source.detector`
-- `block`
-- `transaction`
-- `data`
-
-## Best Quickstart
-
-If you want the fastest way to understand the product, run the deterministic showcase:
+Requires Node.js 22 or newer.
 
 ```bash
 npm install
-npm run showcase
+npm test              # deterministic unit tests, no network
+npm run showcase      # deterministic local demo, no network
+npm run sample -- --seconds 60   # live, read-only mainnet capture -> ./samples/
 ```
 
-`npm run showcase` is the clearest first-run path. It shows:
-
-- what TRONostr produces
-- what the machine-readable events look like
-- how those events can feed relays, SDK consumers, and webhook sinks
-- what runtime stats are available
-
-Actual `npm run showcase` terminal output:
-
-![TRONostr showcase terminal](./assets/showcase-terminal.png)
-
-Other useful local commands:
+Run the live runtime in **local mode** (no keys needed, nothing is signed or published):
 
 ```bash
-npm run demo:status
-npm run smoke
+npm start
+curl http://127.0.0.1:8788/api/v1/summary
 ```
 
-## SDK / Integration Surface
+Set `NOSTR_PRIVATE_KEY` in `.env` to also publish signed events to the relays in `config.yaml`.
+Use a key created only for the publisher, never a wallet key or seed phrase.
 
-The public package surface is intended to be directly usable:
+## Events
 
-- `TRONostrClient`
-- `Publisher`
-- `Watcher`
-- `TRONostrRuntime`
-- `TRONostrStatusTracker`
-- `WebhookOutput`
-- `prepareTRONostrEvent()`
+All events share the `tronostr.v1` schema:
 
-Package subpath exports:
+| kind | eventType | category | asset | detector |
+| --- | --- | --- | --- | --- |
+| 6500 | `block_metrics` | telemetry | | BlockMetricsDetector |
+| 6501 | `trx_transfer` | transfer | TRX | WhaleTransferDetector |
+| 6502 | `usdt_transfer` | transfer | USDT | WhaleTransferDetector |
+| 6503 | `resource_delegation` | resource | TRX (staked) | ResourceDelegationDetector |
+| 6504 | `exchange_flow` | flow | TRX / USDT | ExchangeFlowDetector |
 
-- `tronostr`
-- `tronostr/schema`
-- `tronostr/runtime`
-- `tronostr/status`
-- `tronostr/output`
+Common fields: `schema`, `chain`, `category`, `eventType`, `asset`, `severity`, `source.detector`,
+`block` (height, hash, timestamp), `transaction.hash`, `data`. Events are validated before they
+are published and again when a client consumes them.
 
-Basic consumer example:
+### Detectors
+
+- **WhaleTransferDetector**: native TRX transfers and USDT-TRC20 `transfer` / `transferFrom`
+  calls above configurable thresholds. Transactions that failed on-chain (`REVERT`,
+  `OUT_OF_ENERGY`, …) are skipped. Amounts are decoded with BigInt.
+- **ResourceDelegationDetector**: Stake 2.0 `DelegateResourceContract` / `UnDelegateResourceContract`
+  above a staked-TRX threshold, which is how the TRON energy-rental market moves resources. `data`
+  includes `action`, `resource` (ENERGY/BANDWIDTH), `owner`, `receiver`, `stakedTrx`, and `lock`
+  and `lockPeriodBlocks` for delegations.
+- **ExchangeFlowDetector**: classifies TRX/USDT transfers touching a **user-supplied address book**
+  as `inflow`, `outflow` or `internal`. TRONostr ships no built-in exchange labels on purpose. Add
+  only addresses whose attribution you can cite. The `source` you provide is carried in each event.
+- **BlockMetricsDetector**: height, hash, transaction count and witness for each block.
+
+Thresholds and toggles live in `config.yaml`.
+
+## JSON API (for dashboards)
+
+Enabled by default on `127.0.0.1:8788`. It is read-only, has no dependencies beyond `node:http`,
+and sends CORS headers. It serves from an in-memory ring buffer (`api.storeCapacity`, default 5000
+events).
+
+| endpoint | what it returns |
+| --- | --- |
+| `GET /health` | uptime and the number of stored events |
+| `GET /api/v1/status` | runtime status: latest block, event counts, publisher stats |
+| `GET /api/v1/events?type=&asset=&minSeverity=&since=&limit=` | recent events, newest first |
+| `GET /api/v1/summary?since=&top=` | block stats, transfer volume per asset, top senders/receivers, delegation totals, exchange net flows |
+| `GET /api/v1/schema` | the kind number for each event type |
+
+`since` is seconds before the newest stored event. See `docs/API.md` for response shapes.
+
+## SDK
 
 ```ts
 import { TRONostrClient } from 'tronostr';
 
-const client = new TRONostrClient({
-  relays: ['wss://nos.lol', 'wss://relay.damus.io'],
-});
-
+const client = new TRONostrClient({ relays: ['wss://nos.lol', 'wss://relay.damus.io'] });
 await client.connect();
 
-client.onBlock((event) => {
-  console.log(event.parsedContent.block?.height, event.parsedContent.data.txCount);
-});
-
-client.onTransfer((event) => {
-  console.log(event.parsedContent.asset, event.parsedContent.data.amount);
-});
-
-client.onAlerts((event) => {
-  console.log(event.parsedContent.severity, event.parsedContent.eventType);
-});
+client.onUSDTTransfer((e) => console.log(e.parsedContent.data.amount));
+client.onResourceDelegation((e) => console.log(e.parsedContent.data.action, e.parsedContent.data.stakedTrx));
+client.onExchangeFlow((e) => console.log(e.parsedContent.data.direction, e.parsedContent.data.entity));
+client.onAlerts((e) => console.log(e.parsedContent.severity, e.parsedContent.eventType));
 ```
 
-Publisher stats include:
+The package also exports `Watcher`, `TRONostrRuntime`, the detectors, `Publisher`, `EventStore`,
+`ApiServer`, `JsonlFileOutput`, `WebhookOutput`, `prepareTRONostrEvent()` and the schema
+validators. Subpaths: `tronostr/client`, `tronostr/schema`, `tronostr/runtime`, `tronostr/status`,
+`tronostr/output`, `tronostr/api`, `tronostr/store`. After install, a `tronostr` CLI runs the
+runtime.
 
-- `queueLength`
-- `activeRelayCount`
-- `publishAttempts`
-- `deliveredCount`
-- `reconnectAttempts`
-- `disconnectCount`
+## Architecture
 
-Client stats include:
-
-- `activeRelayCount`
-- `configuredRelayCount`
-
-## Integration Value
-
-TRONostr is already usable in a few concrete integration patterns:
-
-- bots
-  Consume `onAlerts()`, `onTRXTransfer()`, or `onUSDTTransfer()` and react to normalized transfer events.
-- dashboards
-  Consume `onBlock()` and `onTransfer()` for block-level and transfer-level telemetry without parsing raw TRON payloads.
-- alerting systems
-  Use relay subscriptions or mirrored webhook events to route machine-readable alerts into existing pipelines.
-- automated workflows
-  Use the shared event schema as a trigger contract for services that need deterministic TRON event types and payloads.
-
-## Optional Webhook Output
-
-Nostr is still the first and default transport in this repo.
-
-TRONostr can also mirror the same repo-native envelope to an HTTP webhook:
-
-```yaml
-output:
-  webhook:
-    enabled: true
-    url: "http://127.0.0.1:8787/tronostr"
-    timeoutMs: 5000
+```text
+TronGrid (public) -> Watcher -> Detectors -> validated tronostr.v1 events
+                                                |-> EventStore -> JSON API -> dashboards (The Tron Report)
+                                                |-> Nostr Publisher -> relays -> bots / agents
+                                                |-> JSONL file / webhook
 ```
 
-Webhook payload shape:
+The Watcher polls with bounded backoff and jitter, can resume from a file checkpoint, and attaches
+block context to each transaction. Relay connections reconnect with backoff, and the publisher is
+rate limited per relay and queue-bounded.
 
-```json
-{
-  "transport": "webhook",
-  "kind": 6502,
-  "created_at": 1710000000,
-  "tags": [["t", "tron"]],
-  "event": {
-    "schema": "tronostr.v1",
-    "chain": "tron",
-    "category": "transfer",
-    "eventType": "usdt_transfer",
-    "severity": "high",
-    "source": { "detector": "WhaleTransferDetector" },
-    "transaction": { "hash": "..." },
-    "data": { "amount": 2500000 }
-  }
-}
-```
+## Commands
 
-## Example Use Cases
+| command | network? | purpose |
+| --- | --- | --- |
+| `npm test` | no | 55 unit tests (custom runner) |
+| `npm run typecheck` | no | `tsc --noEmit` |
+| `npm run smoke` / `showcase` / `demo:status` | no | deterministic demos with an in-memory relay |
+| `npm run sample -- --seconds N [--usdt X --trx Y --delegation Z]` | TronGrid (read) | live capture to `samples/` |
+| `npm start` | TronGrid (+ relays if a key is set) | live runtime and API |
+| `npm run verify:tron` / `verify:relays` | yes | live connectivity checks |
+| `npm run pack:check` | no | build and list the npm tarball contents |
 
-TRONostr is aimed at:
+## Limitations (honest)
 
-- whale and risk alerting
-- stablecoin movement monitoring
-- block telemetry for dashboards
-- machine-readable triggers for bots and automation
-- lightweight event distribution for autonomous finance systems
+- Uses polling (about every 3 s), not a mempool or event stream. Missed blocks are caught up
+  sequentially.
+- Only USDT is decoded among TRC-20 tokens. There are no DEX, lending or SunPump events yet.
+- `ExchangeFlowDetector` is inert until you add labeled addresses.
+- The API keeps events in memory only. Use the JSONL output or a database for history.
+- Public TronGrid without a key is rate limited, so heavy use needs a `TRON_PRO_API_KEY`.
 
-Repo examples:
+## License
 
-- `examples/bot_example.ts`
-- `examples/block_telemetry_consumer.ts`
-- `examples/webhook_receiver.ts`
-- `examples/event_flow_example.ts`
-- `examples/README.md`
-
-## Running Live
-
-Set `NOSTR_PRIVATE_KEY` in `.env`, then run:
-
-```bash
-npm run build
-npm run start
-```
-
-Useful live/runtime commands:
-
-```bash
-npm run dev
-npm run demo:status -- --live
-npm run verify:tron
-npm run verify:relays
-```
-
-Operational characteristics:
-
-- watcher polling uses bounded backoff and jitter
-- relay connections use explicit reconnect policy
-- publisher exposes queue/runtime stats via `getStats()`
-- optional file-backed checkpoint persistence can resume from the last processed block
-- webhook output is optional and secondary; Nostr remains the default and first transport
-
-## Testing / Verification
-
-Deterministic local proof path:
-
-```bash
-npm test
-npm run smoke
-npm run showcase
-npm run demo:status
-```
-
-These cover:
-
-- detectors
-- schema validation
-- publisher behavior
-- client behavior
-- reconnect/stats/checkpoint behavior
-- prepared event envelopes
-- status tracking
-- webhook delivery
-
-Optional live verification:
-
-```bash
-npm run verify:tron
-npm run verify:relays
-```
-
-Those commands depend on real network access and should be treated as additive live checks, not the default proof path.
-
-## Launch Assets
-
-Small launch-facing text assets are included in `launch`:
-
-- `launch/ABOUT_BLURB.md`
-- `launch/PITCH.md`
-- `launch/WHAT_TRONOSTR_IS.md`
-- `launch/THREAD_DRAFT.md`
-- `launch/SHOWCASE_WALKTHROUGH.md`
-
-## Roadmap
-
-- add more TRON-native detectors
-- support more secondary transports alongside Nostr
-- improve replay/demo tooling
-- keep sharpening the SDK surface for bots, dashboards, and automation
+MIT, see `LICENSE`.

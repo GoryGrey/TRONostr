@@ -94,3 +94,63 @@ export function createInsight(
         },
     };
 }
+
+export const THIRD_ADDRESS_HEX = '41' + '33'.repeat(20);
+
+export function withRet<T extends object>(tx: T, contractRet: string): T & { ret: Array<{ contractRet: string }> } {
+    return { ...tx, ret: [{ contractRet }] };
+}
+
+export function createUsdtTransferFromTx(amountUsdt: number) {
+    const fromWord = OWNER_ADDRESS_HEX.slice(2).padStart(64, '0');
+    const toWord = RECIPIENT_ADDRESS_HEX.slice(2).padStart(64, '0');
+    const amountWord = BigInt(Math.trunc(amountUsdt * 1_000_000)).toString(16).padStart(64, '0');
+    return {
+        txID: `usdt-from-${amountUsdt}`,
+        ret: [{ contractRet: 'SUCCESS' }],
+        raw_data: {
+            timestamp: 1710002500000,
+            contract: [
+                {
+                    type: 'TriggerSmartContract',
+                    parameter: {
+                        value: {
+                            owner_address: THIRD_ADDRESS_HEX,
+                            contract_address: TronWeb.address.toHex(TEST_USDT_CONTRACT).toLowerCase(),
+                            data: `23b872dd${fromWord}${toWord}${amountWord}`,
+                        },
+                    },
+                },
+            ],
+        },
+    };
+}
+
+export function createDelegationTx(
+    type: 'DelegateResourceContract' | 'UnDelegateResourceContract',
+    stakedTrx: number,
+    resource: 'ENERGY' | 'BANDWIDTH' | null = 'ENERGY',
+    extra: Record<string, unknown> = {},
+) {
+    return {
+        txID: `${type}-${stakedTrx}`,
+        ret: [{ contractRet: 'SUCCESS' }],
+        raw_data: {
+            timestamp: 1710004000000,
+            contract: [
+                {
+                    type,
+                    parameter: {
+                        value: {
+                            owner_address: OWNER_ADDRESS_HEX,
+                            receiver_address: RECIPIENT_ADDRESS_HEX,
+                            balance: stakedTrx * 1_000_000,
+                            ...(resource ? { resource } : {}),
+                            ...extra,
+                        },
+                    },
+                },
+            ],
+        },
+    };
+}

@@ -10,6 +10,10 @@ import { checkpointStoreCases } from './CheckpointStore.test';
 import { sdkCases } from './SDK.test';
 import { statusTrackerCases } from './StatusTracker.test';
 import { webhookOutputCases } from './WebhookOutput.test';
+import { tronUtilsCases } from './TronUtils.test';
+import { resourceDelegationDetectorCases } from './ResourceDelegationDetector.test';
+import { exchangeFlowDetectorCases } from './ExchangeFlowDetector.test';
+import { apiCases } from './Api.test';
 
 async function main() {
     const suites = [
@@ -24,6 +28,10 @@ async function main() {
         ['SDK', sdkCases] as const,
         ['StatusTracker', statusTrackerCases] as const,
         ['WebhookOutput', webhookOutputCases] as const,
+        ['TronUtils', tronUtilsCases] as const,
+        ['ResourceDelegationDetector', resourceDelegationDetectorCases] as const,
+        ['ExchangeFlowDetector', exchangeFlowDetectorCases] as const,
+        ['Api', apiCases] as const,
     ];
 
     for (const [suiteName, cases] of suites) {

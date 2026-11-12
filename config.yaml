@@ -14,9 +14,12 @@ tron:
     enabled: false
     path: "./storage/tronostr-checkpoints.json"
     key: "mainnet-default"
-  # Public TRON nodes often have rate limits. Use TRON_PRO_API_KEY in .env if needed.
+  # Public TronGrid works without a key but is rate limited. TRON_PRO_API_KEY in .env is optional.
   
 nostr:
+  # Publishing to relays only happens when NOSTR_PRIVATE_KEY is set. Without it TRONostr runs in
+  # read-only local mode (JSON API / JSONL / webhook).
+  enabled: true
   relays:
     - "wss://relay.damus.io"
     - "wss://nos.lol"
@@ -35,7 +38,18 @@ nostr:
     eventsPerMinute: 10
     queueSize: 100
 
+# Small read-only JSON API over recent events (for dashboards such as The Tron Report).
+api:
+  enabled: true
+  host: "127.0.0.1"
+  port: 8788
+  corsOrigin: "*"
+  storeCapacity: 5000
+
 output:
+  jsonl:
+    enabled: false
+    path: "./storage/tronostr-events.jsonl"
   webhook:
     enabled: false
     url: "http://127.0.0.1:8787/tronostr"
@@ -51,3 +65,23 @@ detectors:
   
   blockMetrics:
     enabled: true
+
+  # Stake 2.0 energy/bandwidth delegations (the TRON "energy rental" market).
+  # Threshold is the staked TRX backing the (un)delegation.
+  resourceDelegation:
+    enabled: true
+    trxThreshold: 1000000
+    resources: ["ENERGY", "BANDWIDTH"]
+    includeUndelegations: true
+
+  # Inflow/outflow to labeled wallets. No labels ship by default: add only addresses whose
+  # attribution you can cite (e.g. an exchange's published proof-of-reserves wallet list).
+  exchangeFlow:
+    enabled: false
+    trxThreshold: 100000
+    usdtThreshold: 50000
+    addresses: []
+    # - address: "T..."
+    #   label: "ExampleExchange hot wallet"
+    #   source: "https://example.com/proof-of-reserves"
+
