@@ -1,24 +1,93 @@
 {
   "name": "tronostr",
-  "version": "1.0.0",
-  "description": "Open realtime TRON event infrastructure for bots, AI agents, analytics, and autonomous finance systems, with Nostr as the first transport layer.",
+  "version": "1.2.0",
+  "description": "Open realtime TRON event infrastructure: whale transfers, USDT-TRC20 moves, energy/bandwidth delegations and exchange flows as structured events over Nostr, a local JSON API, JSONL, and webhooks.",
+  "keywords": [
+    "ai-agents",
+    "analytics",
+    "autonomous-finance",
+    "bots",
+    "energy",
+    "event-stream",
+    "monitoring",
+    "nostr",
+    "signal-infrastructure",
+    "stake-2.0",
+    "structured-events",
+    "telemetry",
+    "trc20",
+    "tron",
+    "tron-analytics",
+    "usdt",
+    "whale-alert"
+  ],
+  "homepage": "https://github.com/GoryGrey/TRONostr#readme",
+  "bugs": {
+    "url": "https://github.com/GoryGrey/TRONostr/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GoryGrey/TRONostr.git"
+  },
+  "license": "MIT",
+  "author": "GoryGrey",
+  "type": "commonjs",
   "main": "dist/lib.js",
   "types": "dist/lib.d.ts",
   "exports": {
-    ".": "./dist/lib.js",
-    "./client": "./dist/Client.js",
-    "./schema": "./dist/schema.js",
-    "./runtime": "./dist/runtime/TRONostrRuntime.js",
-    "./status": "./dist/runtime/StatusTracker.js",
-    "./output": "./dist/output/WebhookOutput.js"
+    ".": {
+      "types": "./dist/lib.d.ts",
+      "default": "./dist/lib.js"
+    },
+    "./client": {
+      "types": "./dist/Client.d.ts",
+      "default": "./dist/Client.js"
+    },
+    "./schema": {
+      "types": "./dist/schema.d.ts",
+      "default": "./dist/schema.js"
+    },
+    "./runtime": {
+      "types": "./dist/runtime/TRONostrRuntime.d.ts",
+      "default": "./dist/runtime/TRONostrRuntime.js"
+    },
+    "./status": {
+      "types": "./dist/runtime/StatusTracker.d.ts",
+      "default": "./dist/runtime/StatusTracker.js"
+    },
+    "./output": {
+      "types": "./dist/output/WebhookOutput.d.ts",
+      "default": "./dist/output/WebhookOutput.js"
+    },
+    "./api": {
+      "types": "./dist/api/ApiServer.d.ts",
+      "default": "./dist/api/ApiServer.js"
+    },
+    "./store": {
+      "types": "./dist/output/EventStore.d.ts",
+      "default": "./dist/output/EventStore.js"
+    },
+    "./history": {
+      "types": "./dist/output/SqliteEventStore.d.ts",
+      "default": "./dist/output/SqliteEventStore.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "tronostr": "dist/index.js"
   },
   "files": [
     "dist",
+    "config.yaml",
     "README.md",
-    "config.yaml"
+    "CHANGELOG.md",
+    "LICENSE"
   ],
+  "engines": {
+    "node": ">=22.13"
+  },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "npm run clean && tsc -p tsconfig.json",
     "dev": "ts-node src/index.ts",
     "start": "npm run build && node dist/index.js",
     "smoke": "ts-node src/smoke.ts",
@@ -27,29 +96,20 @@
     "smoke:live": "ts-node src/verifyTron.ts && ts-node src/verifyRelays.ts",
     "verify:tron": "ts-node src/verifyTron.ts",
     "verify:relays": "ts-node src/verifyRelays.ts",
-    "test": "ts-node test/run.ts"
+    "test": "ts-node test/run.ts",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
+    "sample": "ts-node src/sample.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prepublishOnly": "npm run build && npm test",
+    "pack:check": "npm run build && npm pack --dry-run",
+    "report:history": "ts-node src/historyReport.ts"
   },
-  "keywords": [
-    "tron",
-    "nostr",
-    "telemetry",
-    "event-stream",
-    "structured-events",
-    "bots",
-    "ai-agents",
-    "autonomous-finance",
-    "monitoring",
-    "signal-infrastructure"
-  ],
-  "author": "",
-  "license": "MIT",
-  "type": "commonjs",
   "dependencies": {
     "dotenv": "^17.2.3",
     "nostr-tools": "^2.19.4",
-    "tronweb": "^6.1.1",
-    "ws": "^8.18.3",
-    "yaml": "^2.8.2"
+    "tronweb": "^6.5.2",
+    "ws": "^8.22.2",
+    "yaml": "^2.9.1"
   },
   "devDependencies": {
     "@types/node": "^25.0.3",

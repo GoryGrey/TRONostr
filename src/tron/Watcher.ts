@@ -7,6 +7,11 @@ export interface WatcherConfig {
     eventServer: string;
     apiKey?: string;
     pollIntervalMs?: number;
+    /**
+     * Minimum gap between successive getBlock calls while catching up on several blocks. Public
+     * TronGrid without a key allows ~3 req/s, so the default is 400ms without apiKey and 0 with one.
+     */
+    minRequestIntervalMs?: number;
     maxBackoffMs?: number;
     backoffMultiplier?: number;
     jitterMs?: number;
@@ -45,6 +50,7 @@ export class Watcher extends EventEmitter {
     private checkpointKey: string;
     private startBlock?: number;
     private hasLoadedInitialCheckpoint = false;
+    private readonly minRequestIntervalMs: number;
 
     constructor(config: WatcherConfig) {
         super();
@@ -54,6 +60,7 @@ export class Watcher extends EventEmitter {
             headers: config.apiKey ? { "TRON-PRO-API-KEY": config.apiKey } : {}
         });
         this.pollIntervalMs = config.pollIntervalMs ?? 3000;
+        this.minRequestIntervalMs = Math.max(0, config.minRequestIntervalMs ?? (config.apiKey ? 0 : 400));
         this.maxBackoffMs = config.maxBackoffMs ?? 30000;
         this.backoffMultiplier = config.backoffMultiplier ?? 2;
         this.jitterMs = config.jitterMs ?? 250;
@@ -102,8 +109,15 @@ export class Watcher extends EventEmitter {
                         this.lastBlockNum = blockNum - 1;
                     }
 
-                    for (let i = this.lastBlockNum + 1; i <= blockNum && this.isRunning; i++) {
-                        await this.processBlock(i);
+                    const firstToFetch = this.lastBlockNum + 1;
+                    for (let i = firstToFetch; i <= blockNum && this.isRunning; i++) {
+                        // The head block was just returned in full by getCurrentBlock; reuse it
+                        // instead of downloading it again (halves steady-state API calls).
+                        const reuse = i === blockNum && Array.isArray(currentBlock.transactions) ? currentBlock : undefined;
+                        if (!reuse && i > firstToFetch && this.minRequestIntervalMs > 0) {
+                            await this.sleep(this.minRequestIntervalMs);
+                        }
+                        await this.processBlock(i, reuse);
                         await this.updateCheckpoint(i);
                     }
                 }
@@ -127,8 +141,8 @@ export class Watcher extends EventEmitter {
         }
     }
 
-    private async processBlock(blockNum: number) {
-        const block = await this.tronWeb.trx.getBlock(blockNum);
+    private async processBlock(blockNum: number, prefetched?: any) {
+        const block = prefetched ?? await this.tronWeb.trx.getBlock(blockNum);
         if (!block || !block.block_header?.raw_data) {
             throw new Error(`Invalid block payload for block ${blockNum}`);
         }
@@ -140,6 +154,17 @@ export class Watcher extends EventEmitter {
                 // Inject timestamp if missing from raw_data (sometimes it's in the block header)
                 if (tx.raw_data && !tx.raw_data.timestamp) {
                     tx.raw_data.timestamp = block.block_header.raw_data.timestamp;
+                }
+                // Attach block context so detectors can include block metadata in their events.
+                if (!tx.tronostrBlock) {
+                    Object.defineProperty(tx, 'tronostrBlock', {
+                        value: {
+                            height: block.block_header.raw_data.number,
+                            hash: block.blockID,
+                            timestamp: block.block_header.raw_data.timestamp,
+                        },
+                        enumerable: false,
+                    });
                 }
                 this.emit('transaction', tx);
             }

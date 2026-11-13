@@ -1,10 +1,10 @@
 export type Severity = 'info' | 'low' | 'medium' | 'high' | 'critical';
 
-export type InsightType = 'TRON_BLOCK' | 'TRX_TRANSFER' | 'USDT_TRANSFER';
+export type InsightType = 'TRON_BLOCK' | 'TRX_TRANSFER' | 'USDT_TRANSFER' | 'RESOURCE_DELEGATION' | 'EXCHANGE_FLOW';
 
-export type TRONostrEventType = 'block_metrics' | 'trx_transfer' | 'usdt_transfer';
+export type TRONostrEventType = 'block_metrics' | 'trx_transfer' | 'usdt_transfer' | 'resource_delegation' | 'exchange_flow';
 
-export type TRONostrCategory = 'telemetry' | 'transfer';
+export type TRONostrCategory = 'telemetry' | 'transfer' | 'resource' | 'flow';
 
 export interface ValidationResult<T> {
     ok: boolean;
@@ -42,8 +42,8 @@ export interface ParsedTRONostrEvent {
 }
 
 const VALID_SEVERITIES: Severity[] = ['info', 'low', 'medium', 'high', 'critical'];
-const VALID_EVENT_TYPES: TRONostrEventType[] = ['block_metrics', 'trx_transfer', 'usdt_transfer'];
-const VALID_CATEGORIES: TRONostrCategory[] = ['telemetry', 'transfer'];
+const VALID_EVENT_TYPES: TRONostrEventType[] = ['block_metrics', 'trx_transfer', 'usdt_transfer', 'resource_delegation', 'exchange_flow'];
+const VALID_CATEGORIES: TRONostrCategory[] = ['telemetry', 'transfer', 'resource', 'flow'];
 const VALID_ASSETS = ['TRX', 'USDT'] as const;
 
 export function getKindForInsightType(kindRange: { start: number }, type: InsightType): number {
@@ -54,6 +54,10 @@ export function getKindForInsightType(kindRange: { start: number }, type: Insigh
             return kindRange.start + 1;
         case 'USDT_TRANSFER':
             return kindRange.start + 2;
+        case 'RESOURCE_DELEGATION':
+            return kindRange.start + 3;
+        case 'EXCHANGE_FLOW':
+            return kindRange.start + 4;
         default:
             throw new Error(`Unsupported insight type: ${String(type)}`);
     }
@@ -64,6 +68,8 @@ export function getDefaultKinds(kindRange: { start: number }): number[] {
         getKindForInsightType(kindRange, 'TRON_BLOCK'),
         getKindForInsightType(kindRange, 'TRX_TRANSFER'),
         getKindForInsightType(kindRange, 'USDT_TRANSFER'),
+        getKindForInsightType(kindRange, 'RESOURCE_DELEGATION'),
+        getKindForInsightType(kindRange, 'EXCHANGE_FLOW'),
     ];
 }
 
@@ -186,6 +192,41 @@ export function validateTRONostrEventContent(value: unknown): ValidationResult<T
         }
         if (!candidate.transaction) {
             errors.push('usdt_transfer events must include transaction metadata');
+        }
+    }
+
+    if (candidate.eventType === 'resource_delegation') {
+        if (candidate.category !== 'resource') {
+            errors.push('resource_delegation events must use category "resource"');
+        }
+        if (candidate.asset !== 'TRX') {
+            errors.push('resource_delegation events must use asset "TRX" (the staked amount)');
+        }
+        if (!candidate.transaction) {
+            errors.push('resource_delegation events must include transaction metadata');
+        }
+        const data = candidate.data as Record<string, unknown> | undefined;
+        if (data && data.resource !== 'ENERGY' && data.resource !== 'BANDWIDTH') {
+            errors.push('resource_delegation data.resource must be "ENERGY" or "BANDWIDTH"');
+        }
+        if (data && data.action !== 'delegate' && data.action !== 'undelegate') {
+            errors.push('resource_delegation data.action must be "delegate" or "undelegate"');
+        }
+    }
+
+    if (candidate.eventType === 'exchange_flow') {
+        if (candidate.category !== 'flow') {
+            errors.push('exchange_flow events must use category "flow"');
+        }
+        if (candidate.asset !== 'TRX' && candidate.asset !== 'USDT') {
+            errors.push('exchange_flow events must use asset "TRX" or "USDT"');
+        }
+        if (!candidate.transaction) {
+            errors.push('exchange_flow events must include transaction metadata');
+        }
+        const data = candidate.data as Record<string, unknown> | undefined;
+        if (data && data.direction !== 'inflow' && data.direction !== 'outflow' && data.direction !== 'internal') {
+            errors.push('exchange_flow data.direction must be "inflow", "outflow", or "internal"');
         }
     }
 

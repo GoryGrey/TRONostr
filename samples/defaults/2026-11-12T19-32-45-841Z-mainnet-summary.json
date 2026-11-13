@@ -1,0 +1,998 @@
+{
+  "note": "Real data captured live from TRON mainnet by TRONostr (read-only). Nothing in this file is synthetic.",
+  "capture": {
+    "startedAtUtc": "2026-11-12T19:32:45.841Z",
+    "endedAtUtc": "2026-11-12T19:35:48.930Z",
+    "startedAtEastern": "Nov 12, 2026, 2:32:45 PM EST",
+    "endedAtEastern": "Nov 12, 2026, 2:35:48 PM EST",
+    "requestedSeconds": 180,
+    "source": "https://api.trongrid.io",
+    "apiKeyUsed": false,
+    "nostrPublishing": false,
+    "thresholds": {
+      "whaleTrx": 1000000,
+      "whaleUsdt": 100000,
+      "delegationStakedTrx": 1000000,
+      "exchangeFlow": "disabled (no labeled addresses configured)"
+    },
+    "pollingErrors": 0,
+    "backoffs": 0,
+    "eventsFile": "2026-11-12T19-32-45-841Z-mainnet-events.jsonl"
+  },
+  "status": {
+    "activeRelayCount": 0,
+    "queueLength": 0,
+    "publishAttempts": 0,
+    "deliveredCount": 0,
+    "droppedCount": 0,
+    "invalidPayloadCount": 0,
+    "skippedNoRelayCount": 0,
+    "reconnectAttempts": 0,
+    "disconnectCount": 0,
+    "latestBlockSeen": 87946095,
+    "eventsProcessed": 166,
+    "alertsSurfaced": 3,
+    "lastEventType": "usdt_transfer",
+    "eventTypeCounts": {
+      "block_metrics": 59,
+      "resource_delegation": 58,
+      "usdt_transfer": 49
+    }
+  },
+  "api": {
+    "health": {
+      "ok": true,
+      "uptimeSeconds": 183,
+      "storedEvents": 166
+    },
+    "summary": {
+      "schema": "tronostr.v1",
+      "summary": {
+        "windowEvents": 166,
+        "oldestEventAt": 1794511962,
+        "newestEventAt": 1794512133,
+        "blocks": {
+          "count": 59,
+          "firstHeight": 87946037,
+          "lastHeight": 87946095,
+          "totalTx": 21185,
+          "avgTxPerBlock": 359.067797
+        },
+        "countsByType": {
+          "block_metrics": 59,
+          "resource_delegation": 58,
+          "usdt_transfer": 49
+        },
+        "transferVolume": {
+          "USDT": {
+            "count": 49,
+            "total": 13464330.531226,
+            "largest": 1165059
+          }
+        },
+        "topSenders": [
+          {
+            "address": "TMpErT7p9xKnNic1VBaQktWwMyw7hVhF83",
+            "asset": "USDT",
+            "total": 1165059,
+            "count": 1
+          },
+          {
+            "address": "TEPPThug3zcugr5QEJ4aWZK4D9w5ADLa98",
+            "asset": "USDT",
+            "total": 1000000,
+            "count": 1
+          },
+          {
+            "address": "TTrRWTYLgkGwsnxWuDnzSc9iE2BCs4ihRY",
+            "asset": "USDT",
+            "total": 1000000,
+            "count": 1
+          },
+          {
+            "address": "TUcmBd1CsUoZSpFRZJYtai58y9FrY2R7Tc",
+            "asset": "USDT",
+            "total": 590000,
+            "count": 1
+          },
+          {
+            "address": "TWMzJgnr1gkEUmqBcv9z3aXfsea8t58ajx",
+            "asset": "USDT",
+            "total": 567500,
+            "count": 1
+          }
+        ],
+        "topReceivers": [
+          {
+            "address": "TPUH7PWqPupym78b39Ggo88CdbjaHNfaoX",
+            "asset": "USDT",
+            "total": 1400000,
+            "count": 2
+          },
+          {
+            "address": "TJTKCzQpsG19CSMYF9TPtxz6wSHPSyeKfa",
+            "asset": "USDT",
+            "total": 1399975.99918,
+            "count": 4
+          },
+          {
+            "address": "TEfhUUbfzSsnyCj2VLtf1tHMF1A4ciupye",
+            "asset": "USDT",
+            "total": 1165059,
+            "count": 1
+          },
+          {
+            "address": "TU4vEruvZwLLkSfV9bNw12EJTPvNr7Pvaa",
+            "asset": "USDT",
+            "total": 590000,
+            "count": 1
+          },
+          {
+            "address": "TMXHF7tX9ey7Cppxx6kw94k7ovkpWXBQ8C",
+            "asset": "USDT",
+            "total": 567500,
+            "count": 1
+          }
+        ],
+        "resourceDelegation": {
+          "ENERGY": {
+            "delegatedTrx": 65645247.683616,
+            "undelegatedTrx": 65369510.113394,
+            "count": 52
+          },
+          "BANDWIDTH": {
+            "delegatedTrx": 3707884,
+            "undelegatedTrx": 3707884,
+            "count": 6
+          }
+        },
+        "exchangeFlows": {}
+      }
+    },
+    "latestAlerts": {
+      "schema": "tronostr.v1",
+      "count": 3,
+      "events": [
+        {
+          "kind": 6502,
+          "created_at": 1794512075,
+          "tags": [
+            [
+              "t",
+              "tron"
+            ],
+            [
+              "t",
+              "category:transfer"
+            ],
+            [
+              "t",
+              "event:usdt_transfer"
+            ],
+            [
+              "t",
+              "severity:high"
+            ],
+            [
+              "t",
+              "source:WhaleTransferDetector"
+            ],
+            [
+              "t",
+              "asset:usdt"
+            ],
+            [
+              "h",
+              "87946076"
+            ],
+            [
+              "x",
+              "54a63826345040e50fede906bc3ea52a9c1cf591abfc6e873fae1f8ef3310bc4"
+            ]
+          ],
+          "event": {
+            "schema": "tronostr.v1",
+            "chain": "tron",
+            "category": "transfer",
+            "eventType": "usdt_transfer",
+            "asset": "USDT",
+            "severity": "high",
+            "source": {
+              "detector": "WhaleTransferDetector"
+            },
+            "block": {
+              "height": 87946076,
+              "hash": "00000000053df35cdd6d29ec9f509842c2a50c2240bf6db681312c8e8cb4fd42",
+              "timestamp": 1794512079000
+            },
+            "transaction": {
+              "hash": "54a63826345040e50fede906bc3ea52a9c1cf591abfc6e873fae1f8ef3310bc4"
+            },
+            "data": {
+              "from": "TMpErT7p9xKnNic1VBaQktWwMyw7hVhF83",
+              "to": "TEfhUUbfzSsnyCj2VLtf1tHMF1A4ciupye",
+              "amount": 1165059,
+              "method": "transfer"
+            }
+          }
+        },
+        {
+          "kind": 6502,
+          "created_at": 1794512048,
+          "tags": [
+            [
+              "t",
+              "tron"
+            ],
+            [
+              "t",
+              "category:transfer"
+            ],
+            [
+              "t",
+              "event:usdt_transfer"
+            ],
+            [
+              "t",
+              "severity:high"
+            ],
+            [
+              "t",
+              "source:WhaleTransferDetector"
+            ],
+            [
+              "t",
+              "asset:usdt"
+            ],
+            [
+              "h",
+              "87946070"
+            ],
+            [
+              "x",
+              "cddbabcc3876ae15d384e40d2c6f97434ac7c03aa9d059ebedcb0ff3aa0d5db0"
+            ]
+          ],
+          "event": {
+            "schema": "tronostr.v1",
+            "chain": "tron",
+            "category": "transfer",
+            "eventType": "usdt_transfer",
+            "asset": "USDT",
+            "severity": "high",
+            "source": {
+              "detector": "WhaleTransferDetector"
+            },
+            "block": {
+              "height": 87946070,
+              "hash": "00000000053df35609d171e46dcd0a8ca89e2cf29afa54db862e7ef185eeb40c",
+              "timestamp": 1794512061000
+            },
+            "transaction": {
+              "hash": "cddbabcc3876ae15d384e40d2c6f97434ac7c03aa9d059ebedcb0ff3aa0d5db0"
+            },
+            "data": {
+              "from": "TTrRWTYLgkGwsnxWuDnzSc9iE2BCs4ihRY",
+              "to": "TPUH7PWqPupym78b39Ggo88CdbjaHNfaoX",
+              "amount": 1000000,
+              "method": "transfer"
+            }
+          }
+        },
+        {
+          "kind": 6502,
+          "created_at": 1794511968,
+          "tags": [
+            [
+              "t",
+              "tron"
+            ],
+            [
+              "t",
+              "category:transfer"
+            ],
+            [
+              "t",
+              "event:usdt_transfer"
+            ],
+            [
+              "t",
+              "severity:high"
+            ],
+            [
+              "t",
+              "source:WhaleTransferDetector"
+            ],
+            [
+              "t",
+              "asset:usdt"
+            ],
+            [
+              "h",
+              "87946040"
+            ],
+            [
+              "x",
+              "a1a2e899334e7292c96dcfab79f344b410a657a1e2bdff2ebc45e2aea1ff81ef"
+            ]
+          ],
+          "event": {
+            "schema": "tronostr.v1",
+            "chain": "tron",
+            "category": "transfer",
+            "eventType": "usdt_transfer",
+            "asset": "USDT",
+            "severity": "high",
+            "source": {
+              "detector": "WhaleTransferDetector"
+            },
+            "block": {
+              "height": 87946040,
+              "hash": "00000000053df338ca2e4e3c5fce9d1b23735337de276189529093a5bda7f0b4",
+              "timestamp": 1794511971000
+            },
+            "transaction": {
+              "hash": "a1a2e899334e7292c96dcfab79f344b410a657a1e2bdff2ebc45e2aea1ff81ef"
+            },
+            "data": {
+              "from": "TEPPThug3zcugr5QEJ4aWZK4D9w5ADLa98",
+              "to": "TJTKCzQpsG19CSMYF9TPtxz6wSHPSyeKfa",
+              "amount": 1000000,
+              "method": "transfer"
+            }
+          }
+        }
+      ]
+    },
+    "latestUsdt": {
+      "schema": "tronostr.v1",
+      "count": 5,
+      "events": [
+        {
+          "kind": 6502,
+          "created_at": 1794512133,
+          "tags": [
+            [
+              "t",
+              "tron"
+            ],
+            [
+              "t",
+              "category:transfer"
+            ],
+            [
+              "t",
+              "event:usdt_transfer"
+            ],
+            [
+              "t",
+              "severity:medium"
+            ],
+            [
+              "t",
+              "source:WhaleTransferDetector"
+            ],
+            [
+              "t",
+              "asset:usdt"
+            ],
+            [
+              "h",
+              "87946095"
+            ],
+            [
+              "x",
+              "0ab46256d10f5b186dee73578004ea3b159d5c040e7061024a229f9bdeff2e02"
+            ]
+          ],
+          "event": {
+            "schema": "tronostr.v1",
+            "chain": "tron",
+            "category": "transfer",
+            "eventType": "usdt_transfer",
+            "asset": "USDT",
+            "severity": "medium",
+            "source": {
+              "detector": "WhaleTransferDetector"
+            },
+            "block": {
+              "height": 87946095,
+              "hash": "00000000053df36fbcdaef55ab6098bb3d9eec2c8e830ff87b3144be9dce8fc4",
+              "timestamp": 1794512136000
+            },
+            "transaction": {
+              "hash": "0ab46256d10f5b186dee73578004ea3b159d5c040e7061024a229f9bdeff2e02"
+            },
+            "data": {
+              "from": "TQeDCiS3v43buHgS6Fr2u8hRRDU4wsm2x6",
+              "to": "TWWdrTozUAJMNv42yQPenJwLLMEskGJDg2",
+              "amount": 277597,
+              "method": "transfer"
+            }
+          }
+        },
+        {
+          "kind": 6502,
+          "created_at": 1794512124,
+          "tags": [
+            [
+              "t",
+              "tron"
+            ],
+            [
+              "t",
+              "category:transfer"
+            ],
+            [
+              "t",
+              "event:usdt_transfer"
+            ],
+            [
+              "t",
+              "severity:medium"
+            ],
+            [
+              "t",
+              "source:WhaleTransferDetector"
+            ],
+            [
+              "t",
+              "asset:usdt"
+            ],
+            [
+              "h",
+              "87946093"
+            ],
+            [
+              "x",
+              "ebab9563842f1afffa22acf7eeed764606c9807595dd9e2b7b2a1c66ff5b53a1"
+            ]
+          ],
+          "event": {
+            "schema": "tronostr.v1",
+            "chain": "tron",
+            "category": "transfer",
+            "eventType": "usdt_transfer",
+            "asset": "USDT",
+            "severity": "medium",
+            "source": {
+              "detector": "WhaleTransferDetector"
+            },
+            "block": {
+              "height": 87946093,
+              "hash": "00000000053df36df3124d7e76e813f8fa8f9522d8b0c84833270a2affe2662f",
+              "timestamp": 1794512130000
+            },
+            "transaction": {
+              "hash": "ebab9563842f1afffa22acf7eeed764606c9807595dd9e2b7b2a1c66ff5b53a1"
+            },
+            "data": {
+              "from": "TTM7AnsV1MRfeCfKPbD5fRf6tFWtJykqHh",
+              "to": "TSYn31fjfqfvCpTwLw9Ah1Ty96MgdPqwvW",
+              "amount": 130000,
+              "method": "transfer"
+            }
+          }
+        },
+        {
+          "kind": 6502,
+          "created_at": 1794512055,
+          "tags": [
+            [
+              "t",
+              "tron"
+            ],
+            [
+              "t",
+              "category:transfer"
+            ],
+            [
+              "t",
+              "event:usdt_transfer"
+            ],
+            [
+              "t",
+              "severity:medium"
+            ],
+            [
+              "t",
+              "source:WhaleTransferDetector"
+            ],
+            [
+              "t",
+              "asset:usdt"
+            ],
+            [
+              "h",
+              "87946093"
+            ],
+            [
+              "x",
+              "a6ac1d08a3818e9a77283c3d5d0ef6cc673c7070c991c3f1ae993b41f5e92ff2"
+            ]
+          ],
+          "event": {
+            "schema": "tronostr.v1",
+            "chain": "tron",
+            "category": "transfer",
+            "eventType": "usdt_transfer",
+            "asset": "USDT",
+            "severity": "medium",
+            "source": {
+              "detector": "WhaleTransferDetector"
+            },
+            "block": {
+              "height": 87946093,
+              "hash": "00000000053df36df3124d7e76e813f8fa8f9522d8b0c84833270a2affe2662f",
+              "timestamp": 1794512130000
+            },
+            "transaction": {
+              "hash": "a6ac1d08a3818e9a77283c3d5d0ef6cc673c7070c991c3f1ae993b41f5e92ff2"
+            },
+            "data": {
+              "from": "TJfG36Fpb62swsY9iWszYTjkVE81pkayfj",
+              "to": "TN9trup5ZxLzBqbfEctZCY1ea8oNc5W11t",
+              "amount": 393587,
+              "method": "transfer"
+            }
+          }
+        },
+        {
+          "kind": 6502,
+          "created_at": 1794512118,
+          "tags": [
+            [
+              "t",
+              "tron"
+            ],
+            [
+              "t",
+              "category:transfer"
+            ],
+            [
+              "t",
+              "event:usdt_transfer"
+            ],
+            [
+              "t",
+              "severity:medium"
+            ],
+            [
+              "t",
+              "source:WhaleTransferDetector"
+            ],
+            [
+              "t",
+              "asset:usdt"
+            ],
+            [
+              "h",
+              "87946090"
+            ],
+            [
+              "x",
+              "1af144f720f57b9c44a164628eb3efe3ea2965db9198cc8ce485bcffe1b60749"
+            ]
+          ],
+          "event": {
+            "schema": "tronostr.v1",
+            "chain": "tron",
+            "category": "transfer",
+            "eventType": "usdt_transfer",
+            "asset": "USDT",
+            "severity": "medium",
+            "source": {
+              "detector": "WhaleTransferDetector"
+            },
+            "block": {
+              "height": 87946090,
+              "hash": "00000000053df36af4ccf20ad7b1af381ffdd4c7be03491c4a81a603e98d0afa",
+              "timestamp": 1794512121000
+            },
+            "transaction": {
+              "hash": "1af144f720f57b9c44a164628eb3efe3ea2965db9198cc8ce485bcffe1b60749"
+            },
+            "data": {
+              "from": "TS8KJGuJLvghYor8h6qKpMuMu4YyRHNUkK",
+              "to": "TUow9VWnZnGMXc2VnN2gcujDwAXixcKxJ6",
+              "amount": 101900,
+              "method": "transfer"
+            }
+          }
+        },
+        {
+          "kind": 6502,
+          "created_at": 1794512116,
+          "tags": [
+            [
+              "t",
+              "tron"
+            ],
+            [
+              "t",
+              "category:transfer"
+            ],
+            [
+              "t",
+              "event:usdt_transfer"
+            ],
+            [
+              "t",
+              "severity:medium"
+            ],
+            [
+              "t",
+              "source:WhaleTransferDetector"
+            ],
+            [
+              "t",
+              "asset:usdt"
+            ],
+            [
+              "h",
+              "87946089"
+            ],
+            [
+              "x",
+              "7449ff17155295a7ae007f63be75d9a8b0e56d4ad4e882b6c96f33e99ea163a2"
+            ]
+          ],
+          "event": {
+            "schema": "tronostr.v1",
+            "chain": "tron",
+            "category": "transfer",
+            "eventType": "usdt_transfer",
+            "asset": "USDT",
+            "severity": "medium",
+            "source": {
+              "detector": "WhaleTransferDetector"
+            },
+            "block": {
+              "height": 87946089,
+              "hash": "00000000053df3692343e588999415bdd54f8324f801ddf31ce47ee4f5688f16",
+              "timestamp": 1794512118000
+            },
+            "transaction": {
+              "hash": "7449ff17155295a7ae007f63be75d9a8b0e56d4ad4e882b6c96f33e99ea163a2"
+            },
+            "data": {
+              "from": "TUnB9WFVkEptY4SntSubWfCoP99abJjMzu",
+              "to": "TYFoEaprajWfmYsr2SnoAfpzkwBpbP9DvV",
+              "amount": 221683.35,
+              "method": "transfer"
+            }
+          }
+        }
+      ]
+    },
+    "latestDelegations": {
+      "schema": "tronostr.v1",
+      "count": 5,
+      "events": [
+        {
+          "kind": 6503,
+          "created_at": 1794512103,
+          "tags": [
+            [
+              "t",
+              "tron"
+            ],
+            [
+              "t",
+              "category:resource"
+            ],
+            [
+              "t",
+              "event:resource_delegation"
+            ],
+            [
+              "t",
+              "severity:medium"
+            ],
+            [
+              "t",
+              "source:ResourceDelegationDetector"
+            ],
+            [
+              "t",
+              "asset:trx"
+            ],
+            [
+              "h",
+              "87946085"
+            ],
+            [
+              "x",
+              "d63044d8028c602ea85ce40a535c125d8076090ab20f113b53e8c492296efb21"
+            ]
+          ],
+          "event": {
+            "schema": "tronostr.v1",
+            "chain": "tron",
+            "category": "resource",
+            "eventType": "resource_delegation",
+            "asset": "TRX",
+            "severity": "medium",
+            "source": {
+              "detector": "ResourceDelegationDetector"
+            },
+            "block": {
+              "height": 87946085,
+              "hash": "00000000053df365739c7dda019f8bbe919a99ee8fb3dc79dcba1bc8e8d1db47",
+              "timestamp": 1794512106000
+            },
+            "transaction": {
+              "hash": "d63044d8028c602ea85ce40a535c125d8076090ab20f113b53e8c492296efb21"
+            },
+            "data": {
+              "action": "undelegate",
+              "resource": "ENERGY",
+              "owner": "TKoffapJgw2E586kp9taJvjqdfpiKrWKWG",
+              "receiver": "TCqZkyExhEMjaLQXjy9sUqJ43qinqUbYnP",
+              "stakedTrx": 4332766.215107
+            }
+          }
+        },
+        {
+          "kind": 6503,
+          "created_at": 1794512100,
+          "tags": [
+            [
+              "t",
+              "tron"
+            ],
+            [
+              "t",
+              "category:resource"
+            ],
+            [
+              "t",
+              "event:resource_delegation"
+            ],
+            [
+              "t",
+              "severity:medium"
+            ],
+            [
+              "t",
+              "source:ResourceDelegationDetector"
+            ],
+            [
+              "t",
+              "asset:trx"
+            ],
+            [
+              "h",
+              "87946084"
+            ],
+            [
+              "x",
+              "255de2144dbfcf3b7bda8fa5c8af809319707f4e16a38d753062dbfc291c37e5"
+            ]
+          ],
+          "event": {
+            "schema": "tronostr.v1",
+            "chain": "tron",
+            "category": "resource",
+            "eventType": "resource_delegation",
+            "asset": "TRX",
+            "severity": "medium",
+            "source": {
+              "detector": "ResourceDelegationDetector"
+            },
+            "block": {
+              "height": 87946084,
+              "hash": "00000000053df364e5ca3d917a72395445432ad26aa5ca162ab1a0e5acc9a6c5",
+              "timestamp": 1794512103000
+            },
+            "transaction": {
+              "hash": "255de2144dbfcf3b7bda8fa5c8af809319707f4e16a38d753062dbfc291c37e5"
+            },
+            "data": {
+              "action": "delegate",
+              "resource": "ENERGY",
+              "owner": "TKoffapJgw2E586kp9taJvjqdfpiKrWKWG",
+              "receiver": "TCqZkyExhEMjaLQXjy9sUqJ43qinqUbYnP",
+              "stakedTrx": 4332766.215107,
+              "lock": false
+            }
+          }
+        },
+        {
+          "kind": 6503,
+          "created_at": 1794512096,
+          "tags": [
+            [
+              "t",
+              "tron"
+            ],
+            [
+              "t",
+              "category:resource"
+            ],
+            [
+              "t",
+              "event:resource_delegation"
+            ],
+            [
+              "t",
+              "severity:medium"
+            ],
+            [
+              "t",
+              "source:ResourceDelegationDetector"
+            ],
+            [
+              "t",
+              "asset:trx"
+            ],
+            [
+              "h",
+              "87946082"
+            ],
+            [
+              "x",
+              "8af55830223946c014b571999586ef2601f7bb8a8bc8de22f18fa85cadb4e0f4"
+            ]
+          ],
+          "event": {
+            "schema": "tronostr.v1",
+            "chain": "tron",
+            "category": "resource",
+            "eventType": "resource_delegation",
+            "asset": "TRX",
+            "severity": "medium",
+            "source": {
+              "detector": "ResourceDelegationDetector"
+            },
+            "block": {
+              "height": 87946082,
+              "hash": "00000000053df362d0611c0eb746ce1950a907dcbff9860bc477d11c7d211b79",
+              "timestamp": 1794512097000
+            },
+            "transaction": {
+              "hash": "8af55830223946c014b571999586ef2601f7bb8a8bc8de22f18fa85cadb4e0f4"
+            },
+            "data": {
+              "action": "delegate",
+              "resource": "ENERGY",
+              "owner": "TNuh5GEwFr8otMBTDmWfhC5AwyDZeq3ZrH",
+              "receiver": "TSBHPFbPUUntP8d3mZ4KzdCNJnFJDsDGCq",
+              "stakedTrx": 1036750.326611,
+              "lock": false
+            }
+          }
+        },
+        {
+          "kind": 6503,
+          "created_at": 1794512091,
+          "tags": [
+            [
+              "t",
+              "tron"
+            ],
+            [
+              "t",
+              "category:resource"
+            ],
+            [
+              "t",
+              "event:resource_delegation"
+            ],
+            [
+              "t",
+              "severity:medium"
+            ],
+            [
+              "t",
+              "source:ResourceDelegationDetector"
+            ],
+            [
+              "t",
+              "asset:trx"
+            ],
+            [
+              "h",
+              "87946081"
+            ],
+            [
+              "x",
+              "342505845ef537e5b90342be659ec841a87b71773af64122de1aa769f637116c"
+            ]
+          ],
+          "event": {
+            "schema": "tronostr.v1",
+            "chain": "tron",
+            "category": "resource",
+            "eventType": "resource_delegation",
+            "asset": "TRX",
+            "severity": "medium",
+            "source": {
+              "detector": "ResourceDelegationDetector"
+            },
+            "block": {
+              "height": 87946081,
+              "hash": "00000000053df36109a2f632024b45247196ec6629ef4c5fe81a0d56cc671710",
+              "timestamp": 1794512094000
+            },
+            "transaction": {
+              "hash": "342505845ef537e5b90342be659ec841a87b71773af64122de1aa769f637116c"
+            },
+            "data": {
+              "action": "undelegate",
+              "resource": "ENERGY",
+              "owner": "TEgL7rURWDgVfNyLs8jtxAHrwsUWVCsApN",
+              "receiver": "TQCH1mK8kku4ou9c2MENydPXBe6SYYDPff",
+              "stakedTrx": 1140426
+            }
+          }
+        },
+        {
+          "kind": 6503,
+          "created_at": 1794512090,
+          "tags": [
+            [
+              "t",
+              "tron"
+            ],
+            [
+              "t",
+              "category:resource"
+            ],
+            [
+              "t",
+              "event:resource_delegation"
+            ],
+            [
+              "t",
+              "severity:medium"
+            ],
+            [
+              "t",
+              "source:ResourceDelegationDetector"
+            ],
+            [
+              "t",
+              "asset:trx"
+            ],
+            [
+              "h",
+              "87946080"
+            ],
+            [
+              "x",
+              "419c9956b866bf64ee79a8ed87176ee5fb3d1fad75d688de78e6cf14ce98b256"
+            ]
+          ],
+          "event": {
+            "schema": "tronostr.v1",
+            "chain": "tron",
+            "category": "resource",
+            "eventType": "resource_delegation",
+            "asset": "TRX",
+            "severity": "medium",
+            "source": {
+              "detector": "ResourceDelegationDetector"
+            },
+            "block": {
+              "height": 87946080,
+              "hash": "00000000053df360e778acda2412aeb697a8cd91ccc87b2ea4c083c067c9be13",
+              "timestamp": 1794512091000
+            },
+            "transaction": {
+              "hash": "419c9956b866bf64ee79a8ed87176ee5fb3d1fad75d688de78e6cf14ce98b256"
+            },
+            "data": {
+              "action": "delegate",
+              "resource": "ENERGY",
+              "owner": "TEgL7rURWDgVfNyLs8jtxAHrwsUWVCsApN",
+              "receiver": "TQCH1mK8kku4ou9c2MENydPXBe6SYYDPff",
+              "stakedTrx": 1140426,
+              "lock": false
+            }
+          }
+        }
+      ]
+    }
+  }
+}

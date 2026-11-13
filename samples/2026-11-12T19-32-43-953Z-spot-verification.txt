@@ -1,0 +1,10 @@
+Spot verification of TRONostr sample events against TronGrid, run 2026-11-12T19:38:02.288578+00:00
+usdt transfer tx=c0abb70e157fdfab700d9e0fcfb39d9f0879ce7775fba2617ef5c4b86e547d24 tronostr_amount=10000 chain_Transfer_values=[10000.0] match=True
+usdt transfer tx=8991c53e11531d79b01ba124ede42e74cb334ad9f8fa04305a907615ef0ca13c tronostr_amount=15038 chain_Transfer_values=[15038.0] match=True
+usdt transfer tx=7cecba9bb4225d45324a9455bfc0f35c873f2775ac9898ca4613013cce5ea533 tronostr_amount=209998 chain_Transfer_values=[209998.0] match=True
+usdt transfer tx=db4bd2b3a680bb3c058c0751db1e87e0bbc0bb7c065cc2344bebd3693d5880d9 tronostr_amount=11799 chain_Transfer_values=[11799.0] match=True
+usdt transferFrom tx=2ae38323c4993d051e546ef8a69239b4dac1ed03422f2279f1f9b0847b78c905 tronostr_amount=44015.81 chain_Transfer_values=[44015.81] match=True
+delegation UnDelegateResourceContract tx=73f1037e08c24e15695b8972ea2f2cada3f1bf0907e97454155cf47a5e863119 tronostr_stakedTrx=150000 chain_balance_trx=150000.0 resource=ENERGY ret=SUCCESS match=True
+delegation DelegateResourceContract tx=ae9caf3fabbb31d23d3eb95c339820b3336763eeeca26b545f23e45d15205bfe tronostr_stakedTrx=156595 chain_balance_trx=156595.0 resource=ENERGY ret=SUCCESS match=True
+delegation UnDelegateResourceContract tx=2d0efd26230731851d8d14990365b938e9a25ffc59dce8ba4c82f386581adb93 tronostr_stakedTrx=210967 chain_balance_trx=210967.0 resource=ENERGY ret=SUCCESS match=True
+8/8 matched

@@ -132,6 +132,26 @@ export class TRONostrClient {
         });
     }
 
+    onResourceDelegation(callback: (event: ParsedTRONostrEvent) => void) {
+        this.subscribe({
+            kinds: [this.kindRange.start + 3],
+        } as Filter, (event) => {
+            if (event.parsedContent.eventType === 'resource_delegation') {
+                callback(event);
+            }
+        });
+    }
+
+    onExchangeFlow(callback: (event: ParsedTRONostrEvent) => void) {
+        this.subscribe({
+            kinds: [this.kindRange.start + 4],
+        } as Filter, (event) => {
+            if (event.parsedContent.eventType === 'exchange_flow') {
+                callback(event);
+            }
+        });
+    }
+
     onAlerts(callback: (event: ParsedTRONostrEvent) => void) {
         this.onAll((event) => {
             if (isAlertSeverity(event.parsedContent.severity)) {

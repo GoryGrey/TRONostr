@@ -1,0 +1,201 @@
+{
+  "note": "Numbers read from a locally running TRONostr instance against public TRON mainnet (TronGrid, read-only, no API key, no Nostr publishing). Nothing here is synthetic.",
+  "generatedAtUtc": "2026-11-12T20:13:38.339Z",
+  "generatedAtEastern": "11/12/2026, 3:13:38 PM ET",
+  "apiBase": "http://127.0.0.1:8799",
+  "uptimeSeconds": 260,
+  "latestBlockSeen": 87946854,
+  "runtimeEventCounts": {
+    "block_metrics": 87,
+    "resource_delegation": 82,
+    "usdt_transfer": 53,
+    "exchange_flow": 6
+  },
+  "history": {
+    "path": "tronostr.db",
+    "retentionDays": 30,
+    "storeBlockMetrics": false,
+    "eventRows": 380,
+    "hourlyRows": 1,
+    "oldestEventAt": 1794513601,
+    "newestEventAt": 1794514412,
+    "countsByType": {
+      "exchange_flow": 27,
+      "resource_delegation": 211,
+      "usdt_transfer": 142
+    },
+    "lastPrune": {
+      "at": 1794514158,
+      "eventsDeleted": 0,
+      "hoursDeleted": 0
+    }
+  },
+  "hourlyBucketsWithData": [
+    {
+      "hour": 1794513600,
+      "hourIso": "2026-11-12T20:00:00.000Z",
+      "blocks": 211,
+      "txCount": 66379,
+      "trxTransfers": 19499,
+      "usdtTransfers": 12986,
+      "delegations": 11417,
+      "undelegations": 10937,
+      "energyDelegations": 9472,
+      "whaleUsdtCount": 142,
+      "whaleUsdtVolume": 76756863.342199,
+      "whaleTrxCount": 0,
+      "whaleTrxVolume": 0,
+      "whaleDelegationCount": 106,
+      "whaleDelegatedTrx": 229805233.11589,
+      "whaleUndelegationCount": 105,
+      "whaleUndelegatedTrx": 227805233.11589,
+      "exchangeFlowCount": 27,
+      "exchangeInflowUsdt": 6254437.148069,
+      "exchangeOutflowUsdt": 2735100.7185
+    }
+  ],
+  "totalsAcrossBuckets": {
+    "blocks": 211,
+    "txCount": 66379,
+    "trxTransfers": 19499,
+    "usdtTransfers": 12986,
+    "delegations": 11417,
+    "undelegations": 10937,
+    "energyDelegations": 9472,
+    "whaleUsdtCount": 142,
+    "whaleUsdtVolume": 76756863.342199,
+    "whaleTrxCount": 0,
+    "whaleTrxVolume": 0,
+    "whaleDelegationCount": 106,
+    "whaleDelegatedTrx": 229805233.11589,
+    "whaleUndelegationCount": 105,
+    "whaleUndelegatedTrx": 227805233.11589,
+    "exchangeFlowCount": 27,
+    "exchangeInflowUsdt": 6254437.148069,
+    "exchangeOutflowUsdt": 2735100.7185
+  },
+  "summaryAllStored": {
+    "windowEvents": 467,
+    "blocks": {
+      "count": 87,
+      "firstHeight": 87946768,
+      "lastHeight": 87946854,
+      "totalTx": 23312,
+      "avgTxPerBlock": 267.954023
+    },
+    "countsByType": {
+      "resource_delegation": 211,
+      "usdt_transfer": 142,
+      "exchange_flow": 27,
+      "block_metrics": 87
+    },
+    "transferVolume": {
+      "USDT": {
+        "count": 142,
+        "total": 76756863.342199,
+        "largest": 20046342.961722
+      }
+    },
+    "resourceDelegation": {
+      "ENERGY": {
+        "delegatedTrx": 223205283.11589,
+        "undelegatedTrx": 221205283.11589,
+        "count": 199
+      },
+      "BANDWIDTH": {
+        "delegatedTrx": 6599950,
+        "undelegatedTrx": 6599950,
+        "count": 12
+      }
+    },
+    "exchangeFlows": {
+      "OKX Hot Wallet 8:USDT": {
+        "asset": "USDT",
+        "inflow": 234653.36,
+        "outflow": 120000,
+        "net": 114653.36,
+        "count": 4
+      },
+      "Binance-Hot 12:USDT": {
+        "asset": "USDT",
+        "inflow": 2849170.961373,
+        "outflow": 634677.9292,
+        "net": 2214493.032173,
+        "count": 13
+      },
+      "Kraken: Hot Wallet:USDT": {
+        "asset": "USDT",
+        "inflow": 3120612.826696,
+        "outflow": 1643562.94,
+        "net": 1477049.886696,
+        "count": 6
+      },
+      "Bybit:USDT": {
+        "asset": "USDT",
+        "inflow": 50000,
+        "outflow": 233214.8493,
+        "net": -183214.8493,
+        "count": 3
+      },
+      "Bitget 9:USDT": {
+        "asset": "USDT",
+        "inflow": 0,
+        "outflow": 103645,
+        "net": -103645,
+        "count": 1
+      }
+    }
+  },
+  "historySample": [
+    {
+      "id": 380,
+      "created_at": 1794514409,
+      "eventType": "exchange_flow",
+      "asset": "USDT",
+      "tx": "cdd642baefb108ca8651d6724ee18632c9385bf588d732977f7dd78413ac8577"
+    },
+    {
+      "id": 379,
+      "created_at": 1794514412,
+      "eventType": "resource_delegation",
+      "asset": "TRX",
+      "tx": "5fc75b68560d00b4bd4d9e24c8f381c2552dc3e6e1e6a9d05f9d216cf68de3aa"
+    },
+    {
+      "id": 378,
+      "created_at": 1794514412,
+      "eventType": "resource_delegation",
+      "asset": "TRX",
+      "tx": "3bc0f7802a70e73e1da8ee01bb49dadab4370d1bf49fd51c1f16165880d35f40"
+    }
+  ],
+  "dashboard": {
+    "status": 200,
+    "bytes": 3198,
+    "hasTitle": true,
+    "hasNonAffiliationNotice": true,
+    "csp": "default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+    "assets": [
+      {
+        "path": "/assets/dashboard.js",
+        "status": 200,
+        "bytes": 5968
+      },
+      {
+        "path": "/assets/dashboard.css",
+        "status": 200,
+        "bytes": 2034
+      }
+    ]
+  },
+  "publicLabelsEnabled": true,
+  "endpointStatus": {
+    "health": 200,
+    "status": 200,
+    "stats": 200,
+    "trends": 200,
+    "summary": 200,
+    "history": 200,
+    "labels": 200
+  }
+}

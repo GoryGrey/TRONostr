@@ -46,7 +46,18 @@ export function formatEventSummary(event: PreparedTRONostrEvent) {
         return `${base} block=${event.parsedContent.block?.height} txCount=${event.parsedContent.data.txCount}`;
     }
 
-    return `${base} asset=${event.parsedContent.asset ?? 'n/a'} amount=${event.parsedContent.data.amount} tx=${event.parsedContent.transaction?.hash}`;
+    const d = event.parsedContent.data as Record<string, unknown>;
+    const tx = event.parsedContent.transaction?.hash;
+
+    if (event.parsedContent.eventType === 'resource_delegation') {
+        return `${base} ${d.action} ${d.resource} stakedTrx=${d.stakedTrx} owner=${d.owner} receiver=${d.receiver} tx=${tx}`;
+    }
+
+    if (event.parsedContent.eventType === 'exchange_flow') {
+        return `${base} ${d.direction} ${d.entity} asset=${event.parsedContent.asset} amount=${d.amount} tx=${tx}`;
+    }
+
+    return `${base} asset=${event.parsedContent.asset ?? 'n/a'} amount=${d.amount} tx=${tx}`;
 }
 
 export function formatKeyValueGrid(entries: Array<{ key: string; value: string | number }>) {
